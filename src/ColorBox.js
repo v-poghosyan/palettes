@@ -6,13 +6,31 @@ class ColorBox extends Component {
 
   /* Props received : {color: '...', name: '...'} */
 
+  constructor(props) {
+    super(props);
+    this.state = { beingCopied: false }; /* For conditional styling based on if ColorBox is being copied */
+    this.changeCopyState = this.changeCopyState.bind(this);
+  }
+
+  changeCopyState() {
+    /* Sets beingCopied to 'true' and, as callback, sets it back to 'false' after 1.5 seconds */
+    this.setState({beingCopied: true}, () => setTimeout(() => this.setState({beingCopied: false}), 1500));
+  }
+
   render () {
 
     const {name, background} = this.props; /* Extracting the props */
+    const copied = this.state.beingCopied; /* Extracting state */
 
     return (
-      <CopyToClipboard text={background}>
-        <div style={{background: background}} className="ColorBox">
+      <CopyToClipboard text={background} onCopy={this.changeCopyState}>
+        <div className="ColorBox" style={{background: background}}>
+          {/* Next two divs are hidden overlays that appears only when ColorBox is being copied */}
+          <div className={`CB-overlay ${copied ? 'show' : '' }`} style={{background: background}} />
+          <div className={`CB-copy-msg ${copied ? 'show' : '' }`}>
+            <h1>Copied!</h1>
+            <p>{background}</p>
+          </div>
           <div className="CB-copy-container">
             <div className="CB-box-name">
               <span>{name}</span>

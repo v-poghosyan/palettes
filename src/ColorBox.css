@@ -80,3 +80,79 @@
   opacity: 1;
   transition: 0.5s;
 }
+
+/* Copying animation */
+
+.CB-overlay {
+  /* Hide overlay except on hover */
+  opacity: 0;
+  /* Set the default layer of the overlay */
+  position: absolute; /* Element must be positioned for z-index to take */
+  z-index: 0;
+  /* Width and height are required for scale to have a reference */
+  width: 100px;
+  height: 100px;
+  /* Centering relative to parent */
+  top: 50%;
+  left: 50%;
+  /* For circular growth */
+  border-radius: 50%;
+}
+
+.CB-overlay.show {
+  /* Make overlay appear */
+  opacity: 1;
+  /* Scale overlay */
+  transform: scale(50); /* Scaling by a huge factor */
+  transition: transform 0.7s ease-in-out;
+  /* Move it to a top layer so it covers the rest of the DOM */
+  z-index: 10;
+}
+
+.CB-copy-msg {
+  /* Reset position to be fixed to the top-left corner, floating above the DOM */
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  /* Hide it */
+  display: none;
+  opacity: 0;
+  /* Move it to a layer above the color overlay */
+  z-index: 20;
+  /* Other styling */
+  color: white;
+  font-size: 4rem;
+}
+
+.CB-copy-msg.show {
+  /* Make appear - display as flex to make vertical centering easier (since we're dealing with multi-line content) */
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  /* Transition */
+  transition: opacity 0.7s ease-in-out;
+  transition-delay: 0.4s;
+}
+
+.CB-copy-msg h1 {
+  text-transform: uppercase;
+  font-weight: 600;
+  text-shadow: 1px 2px rgba(0,0,0,0.3);
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+.CB-copy-msg p {
+  font-size: 2rem;
+  text-shadow: 1px 2px rgba(0,0,0,0.3);
+  width: 100%;
+  text-align: center;
+}
+
+/* End of copying animation */
