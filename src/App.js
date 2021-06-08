@@ -3,13 +3,17 @@ import Palette from './Palette';
 import seedPalettes from './seedPalettes'; /* Default palettes */
 
 class App extends Component {
-  render() {
-    return(
+
+  render () {
+
+    return (
       <div className="App">
-        <Palette palette={...seedPalettes} /> {/* Passing all the seedPalettes elements separately as props */ }
+        <Palette {...seedPalettes[0]} /> {/* Passing all the props of a palette separately */ }
       </div>
     )
+
   }
+  
 }
 
 export default App;
