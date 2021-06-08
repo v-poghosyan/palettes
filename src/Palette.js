@@ -8,10 +8,10 @@ class Palette extends Component {
 
     const colorBoxes = this.props.colors.map(col => <ColorBox background={col.color} name={col.name}/>); /* An array of ColorBoxes */
 
-    return (
+    return ( 
       <div className="Palette">
         {/* Navbar */}
-        <div className="Palette-colors">{colorBoxes}</div>
+        <div className="Pal-colors">{colorBoxes}</div>
         {/* Footer */}
       </div>
     );
