@@ -1,7 +1,7 @@
 /* Helper methods for working with colors */
 
 /* Palette object structure - new palette takes the 20 colors of a starter palette and for each generates a 50,100,...,900 scale. */
-/* Then it stores all the 20 50-valued colors at the key '50' in the colors prop, and so on for the other values... */
+/* Then it stores all the 20 50-level colors at the key '50' in the colors prop, and so on for the other levels... */
 /* For example: */
 // {
 //   paletteName: "Material UI Colors",
