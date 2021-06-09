@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
+import PaletteList from './PaletteList';
 import Palette from './Palette';
 import seedPalettes from './seedPalettes'; /* Default palettes */
 import {generatePalette} from './colorHelpers';
@@ -16,7 +17,7 @@ class App extends Component {
         <Route 
           exact 
           path="/" 
-          render={() => <h1>List goes here</h1>}
+          render={() => <PaletteList palettes={seedPalettes}/>}
         />
         {/* Lines 26-27: Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
         {/* Then pass it in as the palette prop to the component */}

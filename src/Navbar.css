@@ -23,6 +23,7 @@
   height: 100%;
 }
 
+/* styling anchors works with react Link components since the latter are anchors under the hood */
 .Navbar-logo a {
   text-decoration: none;
   color: #556e7d;
