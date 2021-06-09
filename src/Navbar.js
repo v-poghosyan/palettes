@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
@@ -10,13 +13,21 @@ class Navbar extends Component {
   
   constructor(props) {
     super(props);
-    this.state = { format: 'hex' }; /* Keep track of format for the Selector component */
-    this.handleChange = this.handleChange.bind(this);
+    this.state = { 
+      format: 'hex', /* Keep track of format for the Selector component */
+      open: false /* Kepp track of whether or not snackbar is open */
+    }; 
+    this.handleFormatChange = this.handleFormatChange.bind(this);
+    this.closeSnackbar = this.closeSnackbar.bind(this);
   }
 
-  handleChange(evt) {
-    this.setState({format : evt.target.value}); /* Changes the value of the material-ui selector */
+  handleFormatChange(evt) {
+    this.setState({format : evt.target.value, open: true}); /* Changes the value of the material-ui selector and makes snackbar appear*/
     this.props.changeColorFormat(evt.target.value); /* Format needs to be passed up to parent palette so that the latter can change the ColorBox formats */
+  }
+
+  closeSnackbar(evt) {
+    this.setState({...this.state, open: false});
   }
 
   render () {
@@ -50,12 +61,27 @@ class Navbar extends Component {
         </div>
         {/* Color Format Selector - using material-ui */}
         <div className="Select-wrapper">
-              <Select value={format} onChange={this.handleChange}>
-                <MenuItem value="hex">HEX: #ffffff</MenuItem>
-                <MenuItem value="rgb">RGB: rgb(255,255,255)</MenuItem>
-                <MenuItem value="rgba">RGBA: rgb(255,255,255,1.0)</MenuItem>
-              </Select>
+          <span>Change format </span>
+          <Select value={format} onChange={this.handleFormatChange}>
+            <MenuItem value="hex">HEX</MenuItem>
+            <MenuItem value="rgb">RGB</MenuItem>
+            <MenuItem value="rgba">RGBA</MenuItem>
+          </Select>
         </div>
+        {/* Snackbar to notify of format change - using material-ui */}
+        <Snackbar 
+          anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} /* Aligns snackbar */
+          open={this.state.open} /* Boolean for whether or not the snackbar is open */
+          autoHideDuration={3000} /* Time in milliseconds to hide the snackbar */
+          message={<span id="Message-ID">Format changed to {format.toUpperCase()}</span>} /* HTML message */
+          ContentProps={{'aria-describedby' : 'Message-ID'}} /* For accessibility by screen readers */
+          action={[ 
+            <IconButton onClick={this.closeSnackbar} color="inherit" key="close" aria-label="close">
+              <CloseIcon />
+            </IconButton>
+          ]} /* Array of buttons that go into snackbar */
+          onClose={this.closeSnackbar} /* Clicking away somwhere else triggers the close event, as does the auto hide feature */
+        />
       </nav>
     );
 

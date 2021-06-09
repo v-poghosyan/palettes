@@ -48,6 +48,7 @@
 }
 
 /* Classes in rc-slider library */
+
 .rc-slider-track {
   background-color: #a1b8c7;
   height: 10px;
@@ -55,4 +56,19 @@
 
 .rc-slider-rail {
   height: 10px;
+}
+
+/* End of rc-slider classes */
+
+.Select-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto; /* push to left */
+  margin-right: 20px;
+}
+
+.Select-wrapper span {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
