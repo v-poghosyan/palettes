@@ -69,7 +69,7 @@ class Navbar extends Component {
           </Select>
         </div>
         {/* Snackbar to notify of format change - using material-ui */}
-        <Snackbar 
+        <Snackbar
           anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} /* Aligns snackbar */
           open={this.state.open} /* Boolean for whether or not the snackbar is open */
           autoHideDuration={3000} /* Time in milliseconds to hide the snackbar */
