@@ -25,20 +25,22 @@ class Palette extends Component {
 
   render () {
 
-    const colors = this.props.palette.colors; /* Extracting the props */
+    const {colors, paletteName, emoji} = this.props.palette; /* Extracting the props */
     const {sliderValue, format} = this.state; /* Extracting the state */
-    const colorBoxes = colors[sliderValue].map(col => <ColorBox background={col[format]} name={col.name}/>); /* An array of ColorBoxes */
+    const colorBoxes = colors[sliderValue].map(col => <ColorBox background={col[format]} name={col.name} key={col.id}/>); /* An array of ColorBoxes */
 
     return ( 
       <div className="Palette">
-        <Navbar 
+        <Navbar
           sliderValue={sliderValue} 
           changeLevel={this.changeLevel}
           changeColorFormat={this.changeColorFormat}
         />
-        {/* Navbar */}
         <div className="Pal-colors">{colorBoxes}</div>
-        {/* Footer */}
+        <footer className="Pal-footer">
+          <span className="Pal-name">{paletteName}</span>
+          <span className="Pal-emoji">{emoji}</span>
+        </footer>
       </div>
     );
 
