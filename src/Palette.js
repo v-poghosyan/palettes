@@ -8,24 +8,34 @@ class Palette extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sliderValue : 400 /* Slider value corresponds to the color levels */
+      sliderValue : 400, /* Slider value corresponds to the color levels */
+      format: 'hex' /* Color format */
     }
     this.changeLevel = this.changeLevel.bind(this);
+    this.changeColorFormat = this.changeColorFormat.bind(this);
   }
 
   changeLevel(newLevel) {
     this.setState({sliderValue : newLevel});
   }
 
+  changeColorFormat(newFormat) {
+    this.setState({...this.state, format: newFormat});
+  }
+
   render () {
 
     const colors = this.props.palette.colors; /* Extracting the props */
-    const sliderValue = this.state.sliderValue; /* Extracting the state */
-    const colorBoxes = colors[sliderValue].map(col => <ColorBox background={col.hex} name={col.name}/>); /* An array of ColorBoxes */
+    const {sliderValue, format} = this.state; /* Extracting the state */
+    const colorBoxes = colors[sliderValue].map(col => <ColorBox background={col[format]} name={col.name}/>); /* An array of ColorBoxes */
 
     return ( 
       <div className="Palette">
-        <Navbar sliderValue={sliderValue} changeLevel={this.changeLevel}/>
+        <Navbar 
+          sliderValue={sliderValue} 
+          changeLevel={this.changeLevel}
+          changeColorFormat={this.changeColorFormat}
+        />
         {/* Navbar */}
         <div className="Pal-colors">{colorBoxes}</div>
         {/* Footer */}
