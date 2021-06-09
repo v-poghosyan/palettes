@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Navbar from './Navbar';
 import './Palette.css'; /* Load this stylesheet before that if rc-slider to overwrite its styling */
 
 class Palette extends Component {
@@ -26,21 +25,7 @@ class Palette extends Component {
 
     return ( 
       <div className="Palette">
-        <div className="Slider-wrapper">
-          <Slider 
-            defaultValue={this.state.sliderValue} 
-            min={100} 
-            max={900}
-            step={100}
-            onAfterChange={this.changeLevel}
-            handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive :hover, :active, :focus, etc pseudo-classes */
-              backgroundColor: 'mediumseagreen', 
-              outline: 'none', 
-              border: 'none', 
-              marginTop: '-2px',
-              boxShadow: 'none'}]}
-          />
-        </div>
+        <Navbar sliderValue={sliderValue} changeLevel={this.changeLevel}/>
         {/* Navbar */}
         <div className="Pal-colors">{colorBoxes}</div>
         {/* Footer */}

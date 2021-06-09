@@ -4,20 +4,5 @@
 }
 
 .Pal-colors {
-  height: 90%;
-}
-
-.Slider-wrapper {
-  width: 15%;
-  margin: 0 10px;
-  display: inline-block;
-}
-
-/* Classes in rc-slider library */
-.rc-slider-track {
-  background-color: transparent;
-}
-
-.rc-slider-rail {
-  height: 10px;
+  height: 95%;
 }

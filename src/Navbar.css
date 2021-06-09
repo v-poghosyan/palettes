@@ -1,0 +1,53 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 5%;
+}
+
+.Navbar-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  padding: 0 12px;
+  font-size: 22px;
+  background-color: #e7edf1;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  height: 100%;
+}
+
+.Navbar-logo a {
+  text-decoration: none;
+  color: #556e7d;
+}
+
+.Slider-wrapper {
+  width: 15%;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Slider-wrapper span {
+  display: flex;
+  margin-top: 5px;
+  width: 140px;
+  font-size: 1rem;
+}
+
+.Slider {
+  display: flex;
+}
+
+/* Classes in rc-slider library */
+.rc-slider-track {
+  background-color: #a1b8c7;
+  height: 10px;
+}
+
+.rc-slider-rail {
+  height: 10px;
+}
