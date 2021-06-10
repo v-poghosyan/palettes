@@ -37,7 +37,7 @@ class Palette extends Component {
           sliderValue={sliderValue} 
           changeLevel={this.changeLevel}
           changeColorFormat={this.changeColorFormat}
-        />
+        /> 
         <div className="Pal-colors">{colorBoxes}</div>
         <footer className="Pal-footer">
           <span className="Pal-name">{paletteName}</span>
