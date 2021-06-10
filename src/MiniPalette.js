@@ -6,6 +6,9 @@ const styles = {
   main: {
     backgroundColor: "purple",
     border: "3px solid yellow"
+    "&h1" : {
+      color: "white"
+    }
   }
 }
 
