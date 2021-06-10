@@ -17,11 +17,11 @@ class Palette extends Component {
     this.changeColorFormat = this.changeColorFormat.bind(this);
   }
 
-  changeLevel(newLevel) {
+  changeLevel(newLevel) { /* Sets the new level in state */
     this.setState({sliderValue : newLevel});
   }
 
-  changeColorFormat(newFormat) {
+  changeColorFormat(newFormat) { /* Sets the new format in state */
     this.setState({...this.state, format: newFormat});
   }
 
