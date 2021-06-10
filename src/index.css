@@ -14,6 +14,11 @@ html, body, .App {
   overflow: hidden;
 }
 
+/* Gets rid of link underlines */
+a {
+  text-decoration: none;
+}
+
 /* Global font */
 .App {
   font-family: 'Montserrat', sans-serif;

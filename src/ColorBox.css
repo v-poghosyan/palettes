@@ -24,6 +24,7 @@
   margin-left: -50px; /* 50px = width/2 */
   margin-top: -15px;  /* 15px = height/2 */
   /* Other styling */
+  font-family: 'Montserrat', sans-serif;
   border: none;
   outline: none;
   background: rgba(255,255,255,0.3);
@@ -63,6 +64,7 @@
   right: 0px;
   bottom: 0px;
   /* Other styling */
+  font-family: 'Montserrat', sans-serif;
   background: rgba(255,255,255,0.3);
   border: none;
   font-size: 0.75rem; /* Units of 'rem' are referenced from 'root font size.' Unlike 'em' units, these don't get smaller with each level of nesting */
@@ -124,6 +126,7 @@
   /* Move it to a layer above the color overlay */
   z-index: 20;
   /* Other styling */
+  font-family: 'Montserrat', sans-serif;
   color: white;
   font-size: 4rem;
 }
