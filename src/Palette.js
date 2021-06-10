@@ -29,7 +29,14 @@ class Palette extends Component {
 
     const {colors, paletteName, emoji, id} = this.props.palette; /* Extracting the props */
     const {sliderValue, format} = this.state; /* Extracting the state */
-    const colorBoxes = colors[sliderValue].map(col => <ColorBox background={col[format]} name={col.name} key={col.id} colorId={col.id} paletteId={id}/>); /* An array of ColorBoxes */
+    /* An array of ColorBoxes */
+    const colorBoxes = colors[sliderValue].map(col => <ColorBox 
+      background={col[format]} 
+      name={col.name} key={col.id} 
+      colorId={col.id} 
+      paletteId={id}
+      moreLink={true}
+    />);
 
     return ( 
       <div className="Palette">

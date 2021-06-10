@@ -5,7 +5,7 @@ import './ColorBox.css';
 
 class ColorBox extends Component {
 
-  /* Props received : {color: '...', name: '...'} */
+  /* Props received : {color: '...', name: '...', moreLink: true/false, ...} */
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class ColorBox extends Component {
 
   render () {
 
-    const {name, background, colorId, paletteId} = this.props; /* Extracting the props */
+    const {name, background, colorId, paletteId, moreLink} = this.props; /* Extracting the props */
     const copied = this.state.beingCopied; /* Extracting state */
 
     return (
@@ -37,9 +37,13 @@ class ColorBox extends Component {
               <span>{name}</span>
             </div>
             <button className="CB-copy-button">Copy</button>
-            <Link to={`/palette/${paletteId}/${colorId}`} onClick={(evt) => evt.stopPropagation()}> {/* Stops click event from propagating to parent CoptToClipboard, preventing copying */}
-              <span className="CB-see-more">More</span>
-            </Link>
+            {/* Note 1: If ColorBox is being renderd from Palette, show 'see more' link. If being rendered from SingleColorPalette, don't */}
+            {/* Note 2: stopPropagation() stops click event from propagating to parent CoptToClipboard, preventing copying */}
+            {moreLink ? <Link 
+                          to={`/palette/${paletteId}/${colorId}`} 
+                          onClick={(evt) => evt.stopPropagation()}> 
+                          <span className="CB-see-more">More</span>
+                        </Link> : "" }
           </div>
         </div>
       </CopyToClipboard>
