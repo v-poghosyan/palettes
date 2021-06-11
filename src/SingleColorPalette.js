@@ -7,6 +7,15 @@ import {withStyles} from '@material-ui/styles';
 
 const styles = {
 
+  Palette: {
+    height: "100vh",
+    width: "100vw",
+  },
+
+  Pal_colors: {
+    height: "92%"
+  },
+
   Go_back: {
     width: "20%",
     height: "50%", /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
@@ -79,13 +88,13 @@ class SingleColorPalette extends Component {
     console.log(shades);
 
     return(
-      <div className="Palette SingleColorPalette">
+      <div className={classes.Palette}>
         <Navbar 
           changeColorFormat={this.changeColorFormat}
           showSlider={false}
           showFormatChanger={true}
         />
-        <div className="Pal-colors">
+        <div className={classes.Pal_colors}>
           {shades.map((col) =>
             <ColorBox
               key={col.id} 
