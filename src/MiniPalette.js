@@ -29,6 +29,7 @@ const styles = {
     margin: "0",
     color: "black",
     paddingTop: "0.5rem",
+    fontFamily: "'Montserrat', sans-serif",
     fontSize: "1rem",
     position: "relative",
   },

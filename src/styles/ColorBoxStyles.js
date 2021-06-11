@@ -67,6 +67,7 @@ export default {
     color: props => (chroma(props.background).luminance() <= 0.15 ? "white" : "black"),
     letterSpacing: "1px",
     textTransform: "uppercase",
+    fontFamily: "'Montserrat', sans-serif",
     fontSize: "1rem"
   },
 
