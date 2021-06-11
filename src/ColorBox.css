@@ -46,6 +46,11 @@
   opacity: 0;
 }
 
+/* Show more and copy buttons need to be black if they're on a light background */ 
+.CB-copy-button.Dark-text {
+  color: black;
+}
+
 .Go-back-button.CB-copy-button {
   opacity: 1;
   text-align: center;
@@ -71,6 +76,10 @@
   font-size: 1rem;
 }
 
+.CB-box-name.Light-text {
+  color: white;
+}
+
 .CB-see-more {
   /* Positioning relative to positioned parent */
   position: absolute;
@@ -90,6 +99,11 @@
   line-height: 30px; /* Same line height as the element itself: centers text vertically */
   /* Hide button until hover */
   opacity: 0;
+}
+
+/* Show more and copy buttons need to be black if they're on a light background */ 
+.CB-see-more.Dark-text {
+  color: black;
 }
 
 .ColorBox:hover .CB-see-more {
@@ -143,6 +157,10 @@
   font-family: 'Montserrat', sans-serif;
   color: white;
   font-size: 4rem;
+}
+
+.CB-copy-msg.Dark-text {
+  color: black;
 }
 
 .CB-copy-msg.show {
