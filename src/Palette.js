@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import './Palette.css'; /* Load this stylesheet before that if rc-slider to overwrite its styling */
 
 class Palette extends Component {
@@ -44,12 +45,10 @@ class Palette extends Component {
           sliderValue={sliderValue} 
           changeLevel={this.changeLevel}
           changeColorFormat={this.changeColorFormat}
+          showSlider = {true}
         /> 
         <div className="Pal-colors">{colorBoxes}</div>
-        <footer className="Pal-footer">
-          <span className="Pal-name">{paletteName}</span>
-          <span className="Pal-emoji">{emoji}</span>
-        </footer>
+        <Footer name={paletteName} emoji={emoji}/>
       </div>
     );
 

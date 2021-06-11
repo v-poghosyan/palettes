@@ -39,11 +39,13 @@ class ColorBox extends Component {
             <button className="CB-copy-button">Copy</button>
             {/* Note 1: If ColorBox is being renderd from Palette, show 'see more' link. If being rendered from SingleColorPalette, don't */}
             {/* Note 2: stopPropagation() stops click event from propagating to parent CoptToClipboard, preventing copying */}
-            {moreLink ? <Link 
-                          to={`/palette/${paletteId}/${colorId}`} 
-                          onClick={(evt) => evt.stopPropagation()}> 
-                          <span className="CB-see-more">More</span>
-                        </Link> : "" }
+            {moreLink ? 
+              <Link 
+                to={`/palette/${paletteId}/${colorId}`} 
+                onClick={(evt) => evt.stopPropagation()}
+              > 
+                <span className="CB-see-more">More</span>
+              </Link> : "" }
           </div>
         </div>
       </CopyToClipboard>

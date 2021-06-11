@@ -33,33 +33,38 @@ class Navbar extends Component {
 
   render () {
 
-    const {sliderValue, changeLevel} = this.props; /* Extracting the props */
+    const {sliderValue, changeLevel, showSlider} = this.props; /* Extracting the props */
     const format = this.state.format; /* Extracting the state */
 
     return(
       <nav className="Navbar">
+
         {/* Logo */}
         <div className="Navbar-logo">
           <Link to="/">Palettes.io</Link>
         </div>
+
         {/* Color Level Slider - using rc-slider */}
-        <div className="Slider-wrapper">
-          <span>Level: {sliderValue}</span>
-          <Slider
-            className = "Slider" 
-            defaultValue={sliderValue} 
-            min={100} 
-            max={900}
-            step={100}
-            onAfterChange={changeLevel}
-            handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive :hover, :active, :focus, etc pseudo-classes */
+        {/* If being rendered from Palette component, show slider. If being rendered from SingleColorPalette component, don't*/}
+        {showSlider ? 
+          <div className="Slider-wrapper">
+            <span>Level: {sliderValue}</span>
+            <Slider
+              className = "Slider" 
+              defaultValue={sliderValue} 
+              min={100} 
+              max={900}
+              step={100}
+              onAfterChange={changeLevel}
+              handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive :hover, :active, :focus, etc pseudo-classes */
               backgroundColor: '#556e7d', 
               outline: 'none', 
               border: '1px solid #556e7d', 
               marginTop: '-2px',
               boxShadow: 'none'}]}
-          />
-        </div>
+            />
+          </div> : ""}
+        
         {/* Color Format Selector - using material-ui */}
         <div className="Select-wrapper">
           <span>Change format </span>
@@ -69,6 +74,7 @@ class Navbar extends Component {
             <MenuItem value="rgba">RGBA</MenuItem>
           </Select>
         </div>
+
         {/* Snackbar to notify of format change - using material-ui */}
         <Snackbar
           anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} /* Aligns snackbar */
@@ -83,6 +89,7 @@ class Navbar extends Component {
           ]} /* Array of buttons that go into snackbar */
           onClose={this.closeSnackbar} /* Clicking away somwhere else triggers the close event, as does the auto hide feature */
         />
+
       </nav>
     );
 
