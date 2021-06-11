@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/styles';
 import MiniPalette from './MiniPalette';
@@ -11,7 +12,8 @@ const styles = {
     backgroundColor: "gray",
     height: "100vh",
     display: "flex",
-    alignItems: "flex-start",
+    flexDirection: "column",
+    alignItems: "center",
     justifyContent: "center",
     fontFamily: "'Montserrat', sans-serif;"
   },
@@ -52,13 +54,14 @@ class PaletteList extends Component {
 
     return(
       <div className={classes.PaletteList}>
+        <Navbar           
+          showSlider={false}
+          showFormatChanger={false}
+        />
         <div className={classes.PL_container}>
-          <nav className={classes.PL_nav}>
-            <h1>Palettes.io</h1>
-          </nav>
           <div className={classes.PL_palettes}>
             {palettes.map(
-            (palette) => (<Link to={`/palette/${palette.id}`}><MiniPalette {...palette}/></Link>))} {/* Links to a matching Route "/palette/:id" */}
+            (palette) => (<Link to={`/palette/${palette.id}`} key={palette.id}><MiniPalette {...palette}/></Link>))} {/* Links to a matching Route "/palette/:id" */}
           </div>
         </div>
       </div>

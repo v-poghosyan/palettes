@@ -46,6 +46,7 @@ class Palette extends Component {
           changeLevel={this.changeLevel}
           changeColorFormat={this.changeColorFormat}
           showSlider = {true}
+          showFormatChanger = {true}
         /> 
         <div className="Pal-colors">{colorBoxes}</div>
         <Footer name={paletteName} emoji={emoji}/>

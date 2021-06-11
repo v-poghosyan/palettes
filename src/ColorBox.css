@@ -11,6 +11,15 @@
   margin-bottom: -4px;
 }
 
+/* ColorBox within a SingleColorPalette should have a slightly different styling */
+.SingleColorPalette .ColorBox {
+  height: 50%
+}
+
+.ColorBox.Go-back {
+  background-color: #556e7d;
+}
+
 .CB-copy-button {
   width: 100px;
   height: 30px;
@@ -35,6 +44,11 @@
   cursor: pointer;
   /* Hide button until hover */
   opacity: 0;
+}
+
+.Go-back-button.CB-copy-button {
+  opacity: 1;
+  text-align: center;
 }
 
 .ColorBox:hover .CB-copy-button {

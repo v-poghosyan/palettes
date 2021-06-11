@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import ColorBox from './ColorBox'; /* We will style ColorBox slightly differently in this component using JSS */
 import Navbar from './Navbar';
 import Footer from './Footer';
-import {withStyles} from '@material-ui/styles';
-
-const styles = {
-
-  SingleColorPalette : {
-    height: "100vh",
-    width: "100vw"
-  },
-
-}
+import {Link} from 'react-router-dom';
 
 class SingleColorPalette extends Component {
 
@@ -37,25 +28,35 @@ class SingleColorPalette extends Component {
 
   render() {
 
-    const {classes, palette, colorId} = this.props; /* Extracting props */
+    const {palette, colorId} = this.props; /* Extracting props */
     const {format} = this.state /* Extracting state */
     const shades = this.getShadesOfColor(palette, colorId);
     console.log(shades);
 
     return(
-      <div className={classes.SingleColorPalette}>
+      <div className="Palette SingleColorPalette">
         <Navbar 
           changeColorFormat={this.changeColorFormat}
-          showSlider = {false}
+          showSlider={false}
+          showFormatChanger={true}
         />
-        {shades.map((col) =>
-          <ColorBox 
-            key={col.id} 
-            name={col.name} 
-            background={col[format]}
-            moreLink = {false} 
-          />
-        )}
+        <div className="Pal-colors">
+          {shades.map((col) =>
+            <ColorBox
+              key={col.id} 
+              name={col.name} 
+              background={col[format]}
+              moreLink={false} 
+            />
+          )}
+          <div className="Go-back ColorBox"> {/* Back button has almost the same styling as a ColorBox */}
+            <Link
+              className="Go-back-button CB-copy-button"
+              to={`/palette/${palette.id}`} 
+            >Go back
+            </Link>
+          </div>
+        </div>
         <Footer name={shades[0].name.slice(0,-4)} emoji={palette.emoji}/>
       </div>
     ); 
@@ -63,4 +64,4 @@ class SingleColorPalette extends Component {
 
 }
 
-export default withStyles(styles)(SingleColorPalette);
+export default SingleColorPalette;

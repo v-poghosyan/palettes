@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: flex-start;
   height: 5%;
+  width: 100%;
   /* Positioning needed for z-index, which is needed for box shadow to be visible */
   position: relative;
   z-index: 30;

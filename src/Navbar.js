@@ -33,7 +33,7 @@ class Navbar extends Component {
 
   render () {
 
-    const {sliderValue, changeLevel, showSlider} = this.props; /* Extracting the props */
+    const {sliderValue, changeLevel, showSlider, showFormatChanger} = this.props; /* Extracting the props */
     const format = this.state.format; /* Extracting the state */
 
     return(
@@ -66,16 +66,17 @@ class Navbar extends Component {
           </div> : ""}
         
         {/* Color Format Selector - using material-ui */}
-        <div className="Select-wrapper">
-          <span>Change format </span>
-          <Select value={format} onChange={this.handleFormatChange}>
-            <MenuItem value="hex">HEX</MenuItem>
-            <MenuItem value="rgb">RGB</MenuItem>
-            <MenuItem value="rgba">RGBA</MenuItem>
-          </Select>
-        </div>
+        {showFormatChanger ? 
+          <div className="Select-wrapper">
+            <span>Change format </span>
+            <Select value={format} onChange={this.handleFormatChange}>
+              <MenuItem value="hex">HEX</MenuItem>
+              <MenuItem value="rgb">RGB</MenuItem>
+              <MenuItem value="rgba">RGBA</MenuItem>
+            </Select>
+          </div> : ""}
 
-        {/* Snackbar to notify of format change - using material-ui */}
+        {/* Snackbar to notify of format change - using material-ui */} 
         <Snackbar
           anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} /* Aligns snackbar */
           open={this.state.open} /* Boolean for whether or not the snackbar is open */
