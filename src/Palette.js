@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import './Palette.css'; /* Load this stylesheet before that if rc-slider to overwrite its styling */
+import {withStyles} from '@material-ui/styles';
+
+const styles = {
+
+  Palette: {
+    height: "100vh",
+    width: "100vw",
+  },
+  
+  Pal_colors: {
+    height: "92%",
+  },
+
+}
 
 class Palette extends Component {
 
@@ -28,7 +41,8 @@ class Palette extends Component {
 
   render () {
 
-    const {colors, paletteName, emoji, id} = this.props.palette; /* Extracting the props */
+    const {classes} = this.props; /* Extracting the props */
+    const {colors, paletteName, emoji, id} = this.props.palette;
     const {sliderValue, format} = this.state; /* Extracting the state */
     /* An array of ColorBoxes */
     const colorBoxes = colors[sliderValue].map(col => <ColorBox 
@@ -40,7 +54,7 @@ class Palette extends Component {
     />);
 
     return ( 
-      <div className="Palette">
+      <div className={classes.Palette}>
         <Navbar
           sliderValue={sliderValue} 
           changeLevel={this.changeLevel}
@@ -48,7 +62,7 @@ class Palette extends Component {
           showSlider = {true}
           showFormatChanger = {true}
         /> 
-        <div className="Pal-colors">{colorBoxes}</div>
+        <div className={classes.Pal_colors}>{colorBoxes}</div>
         <Footer name={paletteName} emoji={emoji}/>
       </div>
     );
@@ -57,4 +71,4 @@ class Palette extends Component {
 
 }
 
-export default Palette;
+export default withStyles(styles)(Palette);

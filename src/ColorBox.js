@@ -5,7 +5,6 @@ import chroma from 'chroma-js'; /* Need this import to conditionally style text 
 import {withStyles} from '@material-ui/styles';
 import nested from 'jss-plugin-nested';
 import jss from 'jss';
-import './ColorBox.css';
 
 jss.use(nested());
 
