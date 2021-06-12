@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {withStyles} from '@material-ui/styles';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,17 +9,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import {ChromePicker} from 'react-color';
+import myTheme from './themes';
 
-const drawerWidth = 300;
+const drawerWidth = 320;
 
 /* The dynamically created styles use a 'theme' parameter that comes in Material UI */
 const useStyles = makeStyles((theme) => ({
@@ -101,6 +101,14 @@ export default function NewPaletteForm() {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={{
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: "white",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+            color: "#556e7d",
+            height: "45px"
+          }}
       >
         <Toolbar>
           <IconButton
@@ -113,7 +121,7 @@ export default function NewPaletteForm() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Pick a color
           </Typography>
         </Toolbar>
       </AppBar>
@@ -126,12 +134,31 @@ export default function NewPaletteForm() {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
+        <div 
+          className={classes.drawerHeader}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            minHeight: "45px",
+            marginBottom: "-2px"
+          }}
+        >
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
+        <ThemeProvider theme={myTheme}>
+          <Button variant="contained" color="secondary">Clear palette</Button>
+          <Button variant="contained" color="primary">Random color</Button>
+        </ThemeProvider>
+        <ChromePicker 
+          color="red"
+          onChangeComplete={(newColor) => console.log(newColor)}
+          width="100%"
+        />
+        <ThemeProvider theme={myTheme}>
+          <Button variant="contained" color="secondary">Add color</Button>
+        </ThemeProvider>
       </Drawer>
 
       {/* Page contents go into main */}
