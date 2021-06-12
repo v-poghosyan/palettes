@@ -29,7 +29,7 @@ class Navbar extends Component {
     this.props.changeColorFormat(evt.target.value); /* Format needs to be passed up to parent palette so that the latter can change the ColorBox formats */
   }
 
-  closeSnackbar(evt) {
+  closeSnackbar() {
     this.setState({...this.state, open: false});
   }
 
