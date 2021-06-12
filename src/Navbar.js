@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import {withStyles} from '@material-ui/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -7,10 +8,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import styles from './styles/NavbarStyles';
 
 class Navbar extends Component {
-
   
   constructor(props) {
     super(props);
@@ -33,24 +33,24 @@ class Navbar extends Component {
 
   render () {
 
-    const {sliderValue, changeLevel, showSlider, showFormatChanger} = this.props; /* Extracting the props */
+    const {classes, sliderValue, changeLevel, showSlider, showFormatChanger} = this.props; /* Extracting the props */
     const format = this.state.format; /* Extracting the state */
 
     return(
-      <nav className="Navbar">
+      <nav className={classes.Navbar}>
 
         {/* Logo */}
-        <div className="Navbar-logo">
+        <div className={classes.Navbar_logo}>
           <Link to="/">Palettes.io</Link>
         </div>
 
         {/* Color Level Slider - using rc-slider */}
         {/* If being rendered from Palette component, show slider. If being rendered from SingleColorPalette component, don't*/}
         {showSlider ? 
-          <div className="Slider-wrapper">
+          <div className={classes.Slider_wrapper}>
             <span>Level: {sliderValue}</span>
             <Slider
-              className = "Slider" 
+              className = {classes.Slider} 
               defaultValue={sliderValue} 
               min={100} 
               max={900}
@@ -67,7 +67,7 @@ class Navbar extends Component {
         
         {/* Color Format Selector - using material-ui */}
         {showFormatChanger ? 
-          <div className="Select-wrapper">
+          <div className={classes.Select_wrapper}>
             <span>Change format </span>
             <Select value={format} onChange={this.handleFormatChange}>
               <MenuItem value="hex">HEX</MenuItem>
@@ -98,4 +98,4 @@ class Navbar extends Component {
 
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);

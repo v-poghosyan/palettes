@@ -64,7 +64,7 @@ export default {
     bottom: "0px",
     /* Other styling */
     padding: "10px",
-    color: props => (chroma(props.background).luminance() <= 0.15 ? "white" : "black"),
+    color: props => (chroma(props.background).luminance() <= 0.45 ? "white" : "black"),
     letterSpacing: "1px",
     textTransform: "uppercase",
     fontFamily: "'Montserrat', sans-serif",
