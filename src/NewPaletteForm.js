@@ -93,6 +93,8 @@ const styles = {
 
 class NewPaletteForm extends Component {
 
+  /* Props received: { savePalette: function() } */
+
   constructor(props) {
     super(props);
     this.state = {
@@ -106,6 +108,7 @@ class NewPaletteForm extends Component {
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   /* This is where we define custom form validators */
@@ -138,15 +141,29 @@ class NewPaletteForm extends Component {
 
   /* Connected to button and form validator */
   addNewColor() {
-    let newCol = { 
-      color: this.state.currentColor,
-      name: this.state.newName
+    let newCol = { /* Builds a simplified color object consisting of color and name */
+      name: this.state.newName,
+      color: this.state.currentColor
     }
     this.setState({...this.state, colors: [...this.state.colors, newCol]});
   }
 
   handleTextChange(evt) {
     this.setState({...this.state, newName: evt.target.value});
+  }
+
+  handleSave() {
+    let newName = "New test palette"
+    let newPal = { /* Builds a full palette object */
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"), /* Replace spaces globally with hyphens */
+      emoji: "🎨",
+      colors: this.state.colors
+    }
+    /* Save palette */
+    this.props.savePalette(newPal);
+    /* Redirect to Palette List */
+    this.props.history.push("/");
   }
 
   render() {
@@ -175,6 +192,30 @@ class NewPaletteForm extends Component {
             <Typography variant="h6" noWrap>
               Pick a color
             </Typography>
+            <ThemeProvider theme={myTheme}>
+              <Button 
+                variant="contained" 
+                color="secondary"
+                onClick={this.handleSave}
+                style={{
+                  height: "25px",
+                  marginLeft: "auto",
+                  boxShadow: "none"
+                }}
+              >Save Palette
+              </Button>
+              <Button 
+                variant="contained" 
+                color="secondary"
+                style={{
+                  height: "25px",
+                  marginLeft: "2px",
+                  boxShadow: "none",
+                  backgroundColor: "#f64f1e"
+                }}
+              >Back
+              </Button>
+            </ThemeProvider>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -213,7 +254,7 @@ class NewPaletteForm extends Component {
               value={newName}
               onChange={this.handleTextChange}
               validators={['required','isNameUnique','isColorUnique']}
-              errorMessages={['This field is required', 'Color name already exists', 'Color already exists']}
+              errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
               style={{
                 width: "100%",
               }}
