@@ -20,8 +20,8 @@ export default {
     marginLeft: "auto",
     marginRight: "20px",
     color: "#556e7d",
-    "&hover $Nav_add_icon": {
-      animation: "spin 10s linear infinite"
+    "&:hover": {
+      color: "black"
     }
   },
   
