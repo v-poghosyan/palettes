@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DraggableColorBox from './DraggableColorBox';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
@@ -97,12 +98,28 @@ class NewPaletteForm extends Component {
     this.state = {
       open: false,
       currentColor: "teal",
-      colors: ["purple", "#E45764"]
+      newName: "",
+      colors: [{color: "blue", name: "blue"}]
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+  }
+
+  /* This is where we define custom form validators */
+  componentDidMount() {
+    ValidatorForm.addValidationRule(
+      'isNameUnique', (value) => {
+        return this.state.colors.every((col) => col.name.toLowerCase() !== value.toLowerCase());
+      }
+    );
+    ValidatorForm.addValidationRule(
+      'isColorUnique', () => {
+        return this.state.colors.every((col) => col.color !== this.state.currentColor);
+      }
+    );
   }
 
   /* Open/close event handlers using arrow function binding */
@@ -114,19 +131,29 @@ class NewPaletteForm extends Component {
     this.setState({...this.state, open: false});
   };
 
+  /* Connected to color picker */
   updateCurrentColor(currCol) {
     this.setState({...this.state, currentColor: currCol.hex});
   }
 
+  /* Connected to button and form validator */
   addNewColor() {
-    this.setState({...this.state, colors: [...this.state.colors, this.state.currentColor]});
+    let newCol = { 
+      color: this.state.currentColor,
+      name: this.state.newName
+    }
+    this.setState({...this.state, colors: [...this.state.colors, newCol]});
+  }
+
+  handleTextChange(evt) {
+    this.setState({...this.state, newName: evt.target.value});
   }
 
   render() {
 
     /* HOC withStyles and useTheme */
     const {classes} = this.props;
-    const {open, currentColor, colors} = this.state;
+    const {open, currentColor, colors, newName} = this.state;
 
     return (
       <div className={classes.root}>
@@ -176,29 +203,41 @@ class NewPaletteForm extends Component {
             <Button variant="contained" color="secondary">Clear palette</Button>
             <Button variant="contained" color="secondary">Random color</Button>
           </ThemeProvider>
-          <ChromePicker 
+          <ChromePicker
             color={currentColor}
             onChangeComplete={(currCol) => this.updateCurrentColor(currCol)}
             width="100%"
           />
-          <ThemeProvider theme={myTheme}>
-            <Button 
-              variant="contained" 
-              onClick={this.addNewColor}
+          <ValidatorForm onSubmit={this.addNewColor}>
+            <TextValidator 
+              value={newName}
+              onChange={this.handleTextChange}
+              validators={['required','isNameUnique','isColorUnique']}
+              errorMessages={['This field is required', 'Color name already exists', 'Color already exists']}
               style={{
-                backgroundColor: currentColor,
-                color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
+                width: "100%",
+              }}
+            />
+            <ThemeProvider theme={myTheme}>
+              <Button 
+                variant="contained" 
+                type="submit"
+                style={{
+                  backgroundColor: currentColor,
+                  color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
+                  width: "100%"
                 }}
-            >Add color
-                <FontAwesomeIcon 
-                  className={classes.Btn_icon} 
-                  icon={faArrowRight}
-                  style={{
-                    color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
-                  }}
-                />
-            </Button>
-          </ThemeProvider>
+              >Add color
+                  <FontAwesomeIcon 
+                    className={classes.Btn_icon} 
+                    icon={faArrowRight}
+                    style={{
+                      color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
+                    }}
+                  />
+              </Button>
+            </ThemeProvider>
+          </ValidatorForm>
         </Drawer>
   
         {/* Page contents go into main */}
@@ -210,7 +249,9 @@ class NewPaletteForm extends Component {
           <div className={classes.drawerHeader} />
           {colors.map(col => 
             <DraggableColorBox 
-              color={col}>
+              color={col.color}
+              name={col.name}
+            >
             </DraggableColorBox>
           )}
         </main>

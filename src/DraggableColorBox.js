@@ -11,8 +11,6 @@ const styles = {
     /* Positioning relatively means positioning relative to the element's normal (flow) position - Enables top/right/bottom/left properies */
     position: "relative",
     cursor: "pointer",
-    /* When styling CB-see-more, the boxes get spaced out - this line fixes that */
-    marginBottom: "-4px",
   }
 };
 
@@ -25,7 +23,8 @@ function DraggableColorBox(props) {
       className={classes.DraggableColorBox}
       style={{backgroundColor: props.color}}
     >
-      {props.color}
+      <p>{props.color}</p>
+      <p>{props.name}</p>
     </div>
   )
 
