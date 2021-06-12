@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlusSquare} from '@fortawesome/free-solid-svg-icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './styles/NavbarStyles';
@@ -33,16 +35,24 @@ class Navbar extends Component {
 
   render () {
 
-    const {classes, sliderValue, changeLevel, showSlider, showFormatChanger} = this.props; /* Extracting the props */
+    const {classes, sliderValue, changeLevel, showSlider, showFormatChanger, showAddNewPalette} = this.props; /* Extracting the props */
     const format = this.state.format; /* Extracting the state */
 
     return(
       <nav className={classes.Navbar}>
 
         {/* Logo */}
-        <div className={classes.Navbar_logo}>
-          <Link to="/">Palettes.io</Link>
-        </div>
+        {showAddNewPalette || showFormatChanger ? 
+          <div className={classes.Navbar_logo}>
+            <Link to="/">Palettes.io</Link>
+          </div> : ''}
+
+        {/* Add new palette */}
+        {showAddNewPalette ? 
+          <Link to="/palette/new" className={classes.Nav_add_palette}>Add Palette
+            <FontAwesomeIcon className={classes.Nav_add_icon} icon={faPlusSquare} />
+          </Link> : ''}
+
 
         {/* Color Level Slider - using rc-slider */}
         {/* If being rendered from Palette component, show slider. If being rendered from SingleColorPalette component, don't*/}

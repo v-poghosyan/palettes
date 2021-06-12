@@ -41,6 +41,7 @@ class SingleColorPalette extends Component {
           changeColorFormat={this.changeColorFormat}
           showSlider={false}
           showFormatChanger={true}
+          showAddNewPalette={false}
         />
         <div className={classes.Pal_colors}>
           {shades.map((col) =>

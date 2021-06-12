@@ -20,6 +20,7 @@ class PaletteList extends Component {
         <Navbar           
           showSlider={false}
           showFormatChanger={false}
+          showAddNewPalette={true}
         />
         <div className={classes.PL_container}>
           <div className={classes.PL_palettes}>

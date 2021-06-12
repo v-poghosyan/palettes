@@ -15,7 +15,20 @@ export default {
     zIndex: "30",
     boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
   },
+
+  Nav_add_palette: {
+    marginLeft: "auto",
+    marginRight: "20px",
+    color: "#556e7d",
+    "&hover $Nav_add_icon": {
+      animation: "spin 10s linear infinite"
+    }
+  },
   
+  Nav_add_icon: {
+    marginLeft: "10px"
+  },
+
   Navbar_logo: {
     display: "flex",
     alignItems: "center",
