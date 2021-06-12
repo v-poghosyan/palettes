@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DraggableColorBox from './DraggableColorBox';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
@@ -18,6 +19,7 @@ import chroma from 'chroma-js';
 import myTheme from './themes';
 
 const drawerWidth = 250;
+const appBarHeight = 45
 
 /* The dynamically created styles use a 'myTheme' object that is modified from the default present in Material UI */
 const styles = {
@@ -25,6 +27,12 @@ const styles = {
     display: 'flex',
   },
   appBar: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "white",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+    color: "#556e7d",
+    height: `${appBarHeight}px`,
     transition: myTheme.transitions.create(['margin', 'width'], {
       easing: myTheme.transitions.easing.sharp,
       duration: myTheme.transitions.duration.leavingScreen,
@@ -52,7 +60,7 @@ const styles = {
     width: drawerWidth,
   },
   drawerHeader: {
-    display: 'flex',
+    display: 'none',
     alignItems: 'center',
     padding: myTheme.spacing(0, 1),
     // necessary for content to be below app bar
@@ -60,13 +68,15 @@ const styles = {
     justifyContent: 'flex-end',
   },
   content: {
+    height: `calc(100vh - ${appBarHeight}px)`,
     flexGrow: 1,
-    padding: myTheme.spacing(3),
+    padding: 0,
     transition: myTheme.transitions.create('margin', {
       easing: myTheme.transitions.easing.sharp,
       duration: myTheme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
+    marginTop: `${appBarHeight}px`
   },
   contentShift: {
     transition: myTheme.transitions.create('margin', {
@@ -124,14 +134,6 @@ class NewPaletteForm extends Component {
         <AppBar
           position="fixed"
           className={`${classes.appBar} ${open ? classes.appBarShift : ''}`}
-          style={{
-              display: "flex",
-              justifyContent: "center",
-              backgroundColor: "white",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-              color: "#556e7d",
-              height: "45px"
-            }}
         >
           <Toolbar>
             <IconButton
@@ -206,9 +208,11 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <ul>
-            {colors.map(col => <li>{col}</li>)}
-          </ul>
+          {colors.map(col => 
+            <DraggableColorBox 
+              color={col}>
+            </DraggableColorBox>
+          )}
         </main>
       </div>
     );
