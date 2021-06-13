@@ -17,6 +17,7 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import chroma from 'chroma-js';
 import myTheme from './themes';
 
@@ -96,6 +97,10 @@ class NewPaletteForm extends Component {
 
   /* Props received: { palettes: [...], savePalette: function() } */
 
+  static defaultProps = {
+    maxColors: 20
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -103,7 +108,7 @@ class NewPaletteForm extends Component {
       newPaletteName: "",
       currentColor: "teal",
       newColorName: "",
-      colors: [{color: "teal", name: "teal"}]
+      colors: this.props.palettes[0].colors
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -112,6 +117,8 @@ class NewPaletteForm extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
+    this.clearPalette = this.clearPalette.bind(this);
+    this.addRandomColor = this.addRandomColor.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
   }
 
@@ -176,8 +183,18 @@ class NewPaletteForm extends Component {
   }
 
   deleteColor(colName) {
-    console.log("being called");
     this.setState({...this.state, colors: this.state.colors.filter((col) => col.name !== colName)});
+  }
+
+  clearPalette() {
+    this.setState({...this.state, colors: []})
+  }
+
+  addRandomColor() { /* Picks a random color from existing palettes */
+    const allColors = this.props.palettes.map((pal) => pal.colors).flat(); /* Flattens nested arrays of colors */
+    let rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    this.setState({...this.state, colors: [...this.state.colors, randomColor]});
   }
 
   /* Comes with react-sortable-hoc */
@@ -189,8 +206,9 @@ class NewPaletteForm extends Component {
   render() {
 
     /* HOC withStyles and useTheme */
-    const {classes} = this.props;
-    const {open, currentColor, colors, newColorName, newPaletteName} = this.state;
+    const {classes, maxColors} = this.props; /* Extracting props */
+    const {open, currentColor, colors, newColorName, newPaletteName} = this.state; /* Extracting state */
+    const isPaletteFull = colors.length >= maxColors;
 
     return (
       <div className={classes.root}>
@@ -286,8 +304,20 @@ class NewPaletteForm extends Component {
             </IconButton>
           </div>
           <ThemeProvider theme={myTheme}>
-            <Button variant="contained" color="secondary" style={{backgroundColor: "#f64f1e"}}>Clear palette</Button>
-            <Button variant="contained" color="secondary">Random color</Button>
+            <Button 
+              variant="contained"
+              color="secondary"
+              onClick={this.clearPalette}
+              style={{backgroundColor: "#f64f1e"}}
+            >Clear palette
+            </Button>
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              disabled={isPaletteFull}
+              onClick={this.addRandomColor}
+            >{isPaletteFull ? "Palette is full" : "Random color"}
+            </Button>
           </ThemeProvider>
           <ChromePicker
             color={currentColor}
@@ -310,19 +340,29 @@ class NewPaletteForm extends Component {
               <Button 
                 variant="contained" 
                 type="submit"
+                disabled={isPaletteFull}
                 style={{
-                  backgroundColor: currentColor,
+                  backgroundColor: (isPaletteFull ? "#E0E0E0" : currentColor),
                   color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                   width: "100%"
                 }}
-              >Add color
-                  <FontAwesomeIcon 
+              >{isPaletteFull ? "Palette is full" : "Add color"}
+                  {isPaletteFull ?
+                    <FontAwesomeIcon 
+                    className={classes.Btn_icon} 
+                    icon={faExclamationCircle}
+                    style={{
+                      color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
+                    }}
+                    /> : 
+                    <FontAwesomeIcon 
                     className={classes.Btn_icon} 
                     icon={faArrowRight}
                     style={{
                       color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                     }}
-                  />
+                    /> 
+                  }
               </Button>
             </ThemeProvider>
           </ValidatorForm>

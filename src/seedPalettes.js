@@ -25,7 +25,6 @@ export default [
       { name: "brown", color: "#795548" },
       { name: "grey", color: "#9E9E9E" },
       { name: "bluegrey", color: "#607D8B" },
-      { name: "MidnightBlue", color: "#2c3e50" },
     ]
   },
   {
