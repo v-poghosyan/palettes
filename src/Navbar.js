@@ -67,11 +67,12 @@ class Navbar extends Component {
               step={100}
               onAfterChange={changeLevel}
               handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive :hover, :active, :focus, etc pseudo-classes */
-              backgroundColor: '#556e7d', 
-              outline: 'none', 
-              border: '1px solid #556e7d', 
-              marginTop: '-2px',
-              boxShadow: 'none'}]}
+                backgroundColor: '#556e7d', 
+                outline: 'none', 
+                border: '1px solid #556e7d', 
+                marginTop: '-2px',
+                boxShadow: 'none'}
+              ]}
             />
           </div> : ""}
         

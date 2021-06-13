@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DraggableColorList from './DraggableColorList';
-import {arrayMove} from 'array-move';
+import {Link} from 'react-router-dom';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -267,17 +267,19 @@ class NewPaletteForm extends Component {
                   }}
                 >Save Palette
                 </Button>
-                <Button 
-                  variant="contained" 
-                  color="secondary"
-                  style={{
-                    height: "25px",
-                    marginLeft: "2px",
-                    boxShadow: "none",
-                    backgroundColor: "#f64f1e"
-                  }}
-                >Back
-                </Button>
+                <Link to="/">
+                  <Button 
+                    variant="contained" 
+                    color="secondary"
+                    style={{
+                      height: "25px",
+                      marginLeft: "2px",
+                      boxShadow: "none",
+                      backgroundColor: "#f64f1e"
+                    }}
+                  >Back
+                  </Button>
+                </Link>
               </ThemeProvider>
           </Toolbar>
         </AppBar>
