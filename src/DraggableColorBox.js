@@ -1,5 +1,6 @@
 import React from 'react';
 import chroma from 'chroma-js';
+import {SortableElement} from 'react-sortable-hoc';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {withStyles} from '@material-ui/styles';
@@ -18,6 +19,7 @@ const styles = {
     /* Positioning relatively means positioning relative to the element's normal (flow) position - Enables top/right/bottom/left properies */
     position: "relative",
     cursor: "pointer",
+    marginBottom: "-5px",
     "&:hover $DCB_trash_icon": {
       transform: "scale(1.2)"
     }
@@ -67,4 +69,4 @@ function DraggableColorBox(props) {
 
 }
 
-export default withStyles(styles)(DraggableColorBox)
+export default SortableElement(withStyles(styles)(DraggableColorBox));

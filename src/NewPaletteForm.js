@@ -11,7 +11,8 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
+import {arrayMove} from 'array-move';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -111,6 +112,7 @@ class NewPaletteForm extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   /* This is where we define custom form validators */
@@ -174,7 +176,14 @@ class NewPaletteForm extends Component {
   }
 
   deleteColor(colName) {
+    console.log("being called");
     this.setState({...this.state, colors: this.state.colors.filter((col) => col.name !== colName)});
+  }
+
+  /* Comes with react-sortable-hoc */
+  onSortEnd({oldIndex, newIndex}) {
+    const arrayMove = require('array-move');
+    this.setState((currState) => ({colors: arrayMove(currState.colors, oldIndex, newIndex)}));
   }
 
   render() {
@@ -326,15 +335,14 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {colors.map(col => 
-            <DraggableColorBox
-              color={col.color} 
-              name={col.name}
-              key={col.name}
-              handleClick={() => this.deleteColor(col.name)} /* passing deleteColor() from the outer lexical environment, since it requires marameters */
-            >
-            </DraggableColorBox>
-          )}
+          <DraggableColorList
+            axis='xy' /* Vor horizontal and vertical draggability */
+            distance={1} /* Required for delete button's onClick event to fire, otherwise a click registers as an attempt to drag */
+            onSortEnd={this.onSortEnd} /* Saves order of colors after drag and drop */
+            colors={colors}
+            deleteColor={this.deleteColor}
+          >
+          </DraggableColorList>
         </main>
       </div>
     );
