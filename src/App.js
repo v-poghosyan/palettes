@@ -30,7 +30,13 @@ class App extends Component {
         <Route 
           exact
           path="/palette/new"
-          render={(routeProps) => <NewPaletteForm {...routeProps} savePalette={this.savePalette}/>}
+          render={(routeProps) => 
+            <NewPaletteForm 
+              {...routeProps} 
+              palettes={this.state.palettes} 
+              savePalette={this.savePalette}
+            />
+          }
         />
         <Route 
           exact 
@@ -42,25 +48,25 @@ class App extends Component {
         <Route 
           exact 
           path="/palette/:id"
-          render={routeProps => (
+          render={routeProps => 
             <Palette 
               palette={generatePalette(
                 this.findPalette(routeProps.match.params.id)
               )}
             />
-          )}
+          }
         />
         <Route
           exact
           path="/palette/:paletteId/:colorId"
-          render={routeProps => (
+          render={routeProps => 
             <SingleColorPalette 
               palette={generatePalette(
                 this.findPalette(routeProps.match.params.paletteId)
               )}
               colorId={routeProps.match.params.colorId}
             />
-          )}
+          }
         />
       </Switch>
       

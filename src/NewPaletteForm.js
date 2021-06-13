@@ -93,14 +93,15 @@ const styles = {
 
 class NewPaletteForm extends Component {
 
-  /* Props received: { savePalette: function() } */
+  /* Props received: { palettes: [...], savePalette: function() } */
 
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      newPaletteName: "",
       currentColor: "teal",
-      newName: "",
+      newColorName: "",
       colors: [{color: "blue", name: "blue"}]
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
@@ -123,6 +124,11 @@ class NewPaletteForm extends Component {
         return this.state.colors.every((col) => col.color !== this.state.currentColor);
       }
     );
+    ValidatorForm.addValidationRule(
+      'isPalNameUnique', (value) => {
+        return this.props.palettes.every((pal) => pal.paletteName.toLowerCase() !== value.toLowerCase());
+      }
+    );
   }
 
   /* Open/close event handlers using arrow function binding */
@@ -142,21 +148,21 @@ class NewPaletteForm extends Component {
   /* Connected to button and form validator */
   addNewColor() {
     let newCol = { /* Builds a simplified color object consisting of color and name */
-      name: this.state.newName,
+      name: this.state.newColorName,
       color: this.state.currentColor
     }
     this.setState({...this.state, colors: [...this.state.colors, newCol]});
   }
 
-  handleTextChange(evt) {
-    this.setState({...this.state, newName: evt.target.value});
+  handleTextChange(evt) { /* Handles naming a color as well as naming a palette */
+    this.setState({...this.state, [evt.target.name]: evt.target.value});
   }
 
   handleSave() {
-    let newName = "New test palette"
+    let newPalName = this.state.newPaletteName;
     let newPal = { /* Builds a full palette object */
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g, "-"), /* Replace spaces globally with hyphens */
+      paletteName: newPalName,
+      id: newPalName.toLowerCase().replace(/ /g, "-"), /* Replace spaces globally with hyphens */
       emoji: "🎨",
       colors: this.state.colors
     }
@@ -170,7 +176,7 @@ class NewPaletteForm extends Component {
 
     /* HOC withStyles and useTheme */
     const {classes} = this.props;
-    const {open, currentColor, colors, newName} = this.state;
+    const {open, currentColor, colors, newColorName, newPaletteName} = this.state;
 
     return (
       <div className={classes.root}>
@@ -192,30 +198,55 @@ class NewPaletteForm extends Component {
             <Typography variant="h6" noWrap>
               Pick a color
             </Typography>
+            <ValidatorForm onSubmit={this.handleSave}>
+              <TextValidator
+                value={newPaletteName}
+                label="Palette Name"
+                name="newPaletteName" /* handleTextChange relies on this attribute */
+                onChange={this.handleTextChange}
+                validators={['required','isPalNameUnique']}
+                errorMessages={['Enter a palette name', 'Palette name already exists']}
+                style={{
+                  width: "100%",
+                }}
+              />
+              <ThemeProvider theme={myTheme}>
+                <Button 
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                  style={{
+                    height: "25px",
+                    marginLeft: "auto",
+                    boxShadow: "none"
+                  }}
+                >Save
+                </Button>
+              </ThemeProvider>
+            </ValidatorForm>
             <ThemeProvider theme={myTheme}>
-              <Button 
-                variant="contained" 
-                color="secondary"
-                onClick={this.handleSave}
-                style={{
-                  height: "25px",
-                  marginLeft: "auto",
-                  boxShadow: "none"
-                }}
-              >Save Palette
-              </Button>
-              <Button 
-                variant="contained" 
-                color="secondary"
-                style={{
-                  height: "25px",
-                  marginLeft: "2px",
-                  boxShadow: "none",
-                  backgroundColor: "#f64f1e"
-                }}
-              >Back
-              </Button>
-            </ThemeProvider>
+                <Button 
+                  variant="contained" 
+                  color="secondary"
+                  style={{
+                    height: "25px",
+                    marginLeft: "auto",
+                    boxShadow: "none"
+                  }}
+                >Save Palette
+                </Button>
+                <Button 
+                  variant="contained" 
+                  color="secondary"
+                  style={{
+                    height: "25px",
+                    marginLeft: "2px",
+                    boxShadow: "none",
+                    backgroundColor: "#f64f1e"
+                  }}
+                >Back
+                </Button>
+              </ThemeProvider>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -241,7 +272,7 @@ class NewPaletteForm extends Component {
             </IconButton>
           </div>
           <ThemeProvider theme={myTheme}>
-            <Button variant="contained" color="secondary">Clear palette</Button>
+            <Button variant="contained" color="secondary" style={{backgroundColor: "#f64f1e"}}>Clear palette</Button>
             <Button variant="contained" color="secondary">Random color</Button>
           </ThemeProvider>
           <ChromePicker
@@ -251,7 +282,9 @@ class NewPaletteForm extends Component {
           />
           <ValidatorForm onSubmit={this.addNewColor}>
             <TextValidator 
-              value={newName}
+              value={newColorName}
+              label="Color Name"
+              name="newColorName" /* handleTextChange relies on this attribute */
               onChange={this.handleTextChange}
               validators={['required','isNameUnique','isColorUnique']}
               errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}

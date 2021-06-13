@@ -9,7 +9,8 @@ export default {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily: "'Montserrat', sans-serif;"
+    fontFamily: "'Montserrat', sans-serif;",
+    overflow: "scroll"
   },
 
   PL_container: {

@@ -21,7 +21,7 @@ export default {
     marginRight: "20px",
     color: "#556e7d",
     "&:hover": {
-      color: "black"
+      color: "#f64f1e"
     }
   },
   
