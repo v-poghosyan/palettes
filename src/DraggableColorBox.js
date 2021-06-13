@@ -49,13 +49,18 @@ const styles = {
 
 function DraggableColorBox(props) {
 
-  const {classes} = props;
+  const {classes, color, name, handleClick} = props;
 
   return (
-    <div className={classes.DraggableColorBox} style={{backgroundColor: props.color}}>
+    <div className={classes.DraggableColorBox} style={{backgroundColor: color}}>
       <div className={classes.DCB_content}>
-        <span>{props.name.toUpperCase()}</span>
-        <span className={classes.DCB_trash_icon}><FontAwesomeIcon icon={faTrash}/></span>
+        <span>{name.toUpperCase()}</span>
+        <div 
+          className={classes.DCB_trash_icon}
+          onClick={handleClick}
+        >
+          <FontAwesomeIcon icon={faTrash}/>
+        </div>
       </div>
     </div>
   )

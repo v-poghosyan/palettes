@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
-import {colors, withStyles} from '@material-ui/core';
+import {withStyles} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -110,6 +110,7 @@ class NewPaletteForm extends Component {
     this.addNewColor = this.addNewColor.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.deleteColor = this.deleteColor.bind(this);
   }
 
   /* This is where we define custom form validators */
@@ -170,6 +171,10 @@ class NewPaletteForm extends Component {
     this.props.savePalette(newPal);
     /* Redirect to Palette List */
     this.props.history.push("/");
+  }
+
+  deleteColor(colName) {
+    this.setState({...this.state, colors: this.state.colors.filter((col) => col.name !== colName)});
   }
 
   render() {
@@ -322,7 +327,13 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {colors.map(col => 
-            <DraggableColorBox color={col.color} name={col.name}></DraggableColorBox>
+            <DraggableColorBox
+              color={col.color} 
+              name={col.name}
+              key={col.name}
+              handleClick={() => this.deleteColor(col.name)} /* passing deleteColor() from the outer lexical environment, since it requires marameters */
+            >
+            </DraggableColorBox>
           )}
         </main>
       </div>
