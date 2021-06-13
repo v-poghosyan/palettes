@@ -102,7 +102,7 @@ class NewPaletteForm extends Component {
       newPaletteName: "",
       currentColor: "teal",
       newColorName: "",
-      colors: [{color: "blue", name: "blue"}]
+      colors: [{color: "teal", name: "teal"}]
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -322,11 +322,7 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {colors.map(col => 
-            <DraggableColorBox 
-              color={col.color}
-              name={col.name}
-            >
-            </DraggableColorBox>
+            <DraggableColorBox color={col.color} name={col.name}></DraggableColorBox>
           )}
         </main>
       </div>
