@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
+import DraggableColorList from './DraggableColorList';
+import PaletteFormNav from './PaletteFormNav';
 import clsx from 'clsx';
 import {withStyles} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DraggableColorList from './DraggableColorList';
-import {Link} from 'react-router-dom';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import chroma from 'chroma-js';
-import myTheme from './themes';
+import myTheme from './styles/Themes';
 
 const drawerWidth = 250;
 const appBarHeight = 45
@@ -134,11 +129,6 @@ class NewPaletteForm extends Component {
         return this.state.colors.every((col) => col.color !== this.state.currentColor);
       }
     );
-    ValidatorForm.addValidationRule(
-      'isPalNameUnique', (value) => {
-        return this.props.palettes.every((pal) => pal.paletteName.toLowerCase() !== value.toLowerCase());
-      }
-    );
   }
 
   /* Open/close event handlers using arrow function binding */
@@ -168,8 +158,7 @@ class NewPaletteForm extends Component {
     this.setState({...this.state, [evt.target.name]: evt.target.value});
   }
 
-  handleSave() {
-    let newPalName = this.state.newPaletteName;
+  handleSave(newPalName) {
     let newPal = { /* Builds a full palette object */
       paletteName: newPalName,
       id: newPalName.toLowerCase().replace(/ /g, "-"), /* Replace spaces globally with hyphens */
@@ -199,90 +188,30 @@ class NewPaletteForm extends Component {
 
   /* Comes with react-sortable-hoc */
   onSortEnd({oldIndex, newIndex}) {
-    const arrayMove = require('array-move');
+    const arrayMove = require('array-move'); /* Equivalent to importing */
     this.setState((currState) => ({colors: arrayMove(currState.colors, oldIndex, newIndex)}));
   }
 
   render() {
-
+    
     /* HOC withStyles and useTheme */
-    const {classes, maxColors} = this.props; /* Extracting props */
+    const {classes, maxColors, palettes} = this.props; /* Extracting props */
     const {open, currentColor, colors, newColorName, newPaletteName} = this.state; /* Extracting state */
     const isPaletteFull = colors.length >= maxColors;
 
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={`${classes.appBar} ${open ? classes.appBarShift : ''}`}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-              Pick a color
-            </Typography>
-            <ValidatorForm onSubmit={this.handleSave}>
-              <TextValidator
-                value={newPaletteName}
-                label="Palette Name"
-                name="newPaletteName" /* handleTextChange relies on this attribute */
-                onChange={this.handleTextChange}
-                validators={['required','isPalNameUnique']}
-                errorMessages={['Enter a palette name', 'Palette name already exists']}
-                style={{
-                  width: "100%",
-                }}
-              />
-              <ThemeProvider theme={myTheme}>
-                <Button 
-                  variant="contained"
-                  type="submit"
-                  color="secondary"
-                  style={{
-                    height: "25px",
-                    marginLeft: "auto",
-                    boxShadow: "none"
-                  }}
-                >Save
-                </Button>
-              </ThemeProvider>
-            </ValidatorForm>
-            <ThemeProvider theme={myTheme}>
-                <Button 
-                  variant="contained" 
-                  color="secondary"
-                  style={{
-                    height: "25px",
-                    marginLeft: "auto",
-                    boxShadow: "none"
-                  }}
-                >Save Palette
-                </Button>
-                <Link to="/">
-                  <Button 
-                    variant="contained" 
-                    color="secondary"
-                    style={{
-                      height: "25px",
-                      marginLeft: "2px",
-                      boxShadow: "none",
-                      backgroundColor: "#f64f1e"
-                    }}
-                  >Back
-                  </Button>
-                </Link>
-              </ThemeProvider>
-          </Toolbar>
-        </AppBar>
+        {/* Note: Passing down classes will allow us to keep the styles in one piece in the parent. So that PaletteFormNav need not be withStyles() */}
+        <PaletteFormNav 
+          classes={classes} 
+          open={open}
+          newPaletteName={newPaletteName}
+          palettes={palettes}
+          handleTextChange={this.handleTextChange}
+          handleDrawerOpen={this.handleDrawerOpen}
+          handleDrawerClose={this.handleDrawerClose}
+          handleSave={this.handleSave}
+        />
         <Drawer
           className={classes.drawer}
           variant="persistent"
