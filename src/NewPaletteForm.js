@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
 import clsx from 'clsx';
 import {withStyles} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
@@ -117,20 +118,6 @@ class NewPaletteForm extends Component {
     this.onSortEnd = this.onSortEnd.bind(this);
   }
 
-  /* This is where we define custom form validators */
-  componentDidMount() {
-    ValidatorForm.addValidationRule(
-      'isNameUnique', (value) => {
-        return this.state.colors.every((col) => col.name.toLowerCase() !== value.toLowerCase());
-      }
-    );
-    ValidatorForm.addValidationRule(
-      'isColorUnique', () => {
-        return this.state.colors.every((col) => col.color !== this.state.currentColor);
-      }
-    );
-  }
-
   /* Open/close event handlers using arrow function binding */
   handleDrawerOpen() {
     this.setState({...this.state, open: true})
@@ -141,8 +128,8 @@ class NewPaletteForm extends Component {
   };
 
   /* Connected to color picker */
-  updateCurrentColor(currCol) {
-    this.setState({...this.state, currentColor: currCol.hex});
+  updateCurrentColor(col) {
+    this.setState({...this.state, currentColor: col});
   }
 
   /* Connected to button and form validator */
@@ -250,53 +237,15 @@ class NewPaletteForm extends Component {
             >{isPaletteFull ? "Palette is full" : "Random color"}
             </Button>
           </ThemeProvider>
-          <ChromePicker
-            color={currentColor}
-            onChangeComplete={(currCol) => this.updateCurrentColor(currCol)}
-            width="100%"
+          <ColorPickerForm 
+            classes={classes} 
+            isPaletteFull={isPaletteFull}
+            currentColor={currentColor}
+            newColorName={newColorName}
+            updateCurrentColor={this.updateCurrentColor}
+            handleTextChange={this.handleTextChange}
+            addNewColor={this.addNewColor}
           />
-          <ValidatorForm onSubmit={this.addNewColor}>
-            <TextValidator 
-              value={newColorName}
-              label="Color Name"
-              name="newColorName" /* handleTextChange relies on this attribute */
-              onChange={this.handleTextChange}
-              validators={['required','isNameUnique','isColorUnique']}
-              errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
-              style={{
-                width: "100%",
-              }}
-            />
-            <ThemeProvider theme={myTheme}>
-              <Button 
-                variant="contained" 
-                type="submit"
-                disabled={isPaletteFull}
-                style={{
-                  backgroundColor: (isPaletteFull ? "#E0E0E0" : currentColor),
-                  color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
-                  width: "100%"
-                }}
-              >{isPaletteFull ? "Palette is full" : "Add color"}
-                  {isPaletteFull ?
-                    <FontAwesomeIcon 
-                    className={classes.Btn_icon} 
-                    icon={faExclamationCircle}
-                    style={{
-                      color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
-                    }}
-                    /> : 
-                    <FontAwesomeIcon 
-                    className={classes.Btn_icon} 
-                    icon={faArrowRight}
-                    style={{
-                      color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
-                    }}
-                    /> 
-                  }
-              </Button>
-            </ThemeProvider>
-          </ValidatorForm>
         </Drawer>
   
         {/* Page contents go into main */}
