@@ -1,7 +1,8 @@
+import {DRAWER_WIDTH, APP_BAR_HEIGHT} from './Constants';
 import myTheme from './Themes';
 
-const drawerWidth = 250;
-const appBarHeight = 45
+const drawerWidth = DRAWER_WIDTH;
+const appBarHeight = APP_BAR_HEIGHT;
 
 export default {
 

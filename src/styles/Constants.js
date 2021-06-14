@@ -1,0 +1,4 @@
+const DRAWER_WIDTH = 300;
+const APP_BAR_HEIGHT = 45;
+
+export {DRAWER_WIDTH, APP_BAR_HEIGHT}
