@@ -23,13 +23,16 @@ const styles = {
   hide: {
     display: 'none',
   },
+
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
   },
+
   drawerPaper: {
     width: drawerWidth,
   },
+
   drawerHeader: {
     display: 'none',
     alignItems: 'center',
@@ -38,6 +41,7 @@ const styles = {
     ...myTheme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
+
   content: {
     height: `calc(100vh - ${appBarHeight}px)`,
     flexGrow: 1,
@@ -49,6 +53,7 @@ const styles = {
     marginLeft: -drawerWidth,
     marginTop: `${appBarHeight}px`
   },
+  
   contentShift: {
     transition: myTheme.transitions.create('margin', {
       easing: myTheme.transitions.easing.easeOut,
@@ -56,9 +61,7 @@ const styles = {
     }),
     marginLeft: 0,
   },
-  Btn_icon: {
-    marginLeft: "10px",
-  }
+
 }
 
 class NewPaletteForm extends Component {

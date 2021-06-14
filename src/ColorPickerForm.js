@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withStyles} from '@material-ui/styles';
 import {ThemeProvider} from '@material-ui/core';
 import Button from '@material-ui/core/Button'
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
@@ -8,6 +9,14 @@ import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import chroma from 'chroma-js';
 import myTheme from './styles/Themes';
+
+const styles = {
+
+  Text_input: {
+    width: "100%"
+  },
+
+}
 
 class ColorPickerForm extends Component {
 
@@ -55,29 +64,28 @@ class ColorPickerForm extends Component {
     const {classes, isPaletteFull} = this.props; /* Extracting props */
 
     return(
-      <div>
+      <div className={classes.ColorPickerForm}>
         <ChromePicker
             color={currentColor}
             onChangeComplete={(col) => this.updateCurrentColor(col)}
             width="100%"
         />
           <ValidatorForm onSubmit={() => this.handleSubmit(currentColor, newColorName)}>
-            <TextValidator 
+            <TextValidator className={classes.Text_input}
               value={newColorName}
               label="Color Name"
               name="newColorName" /* handleTextChange relies on this attribute */
+              variant="filled"
               onChange={this.handleTextChange}
               validators={['required','isNameUnique','isColorUnique']}
               errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
-              style={{
-                width: "100%",
-              }}
             />
             <ThemeProvider theme={myTheme}>
-              <Button 
+              <Button
                 variant="contained" 
                 type="submit"
                 disabled={isPaletteFull}
+                /* Styling here since need access to state */
                 style={{
                   backgroundColor: (isPaletteFull ? "#E0E0E0" : currentColor),
                   color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
@@ -86,16 +94,18 @@ class ColorPickerForm extends Component {
               >{isPaletteFull ? "Palette is full" : "Add color"}
                   {isPaletteFull ?
                     <FontAwesomeIcon 
-                    className={classes.Btn_icon} 
                     icon={faExclamationCircle}
                     style={{
+                      /* Styling here since need access to state */
+                      marginLeft: "10px",
                       color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                     }}
                     /> : 
                     <FontAwesomeIcon 
-                    className={classes.Btn_icon} 
                     icon={faArrowRight}
                     style={{
+                      /* Styling here since need access to state */
+                      marginLeft: "10px",
                       color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                     }}
                     /> 
@@ -109,4 +119,4 @@ class ColorPickerForm extends Component {
 
 }
 
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withStyles} from '@material-ui/styles';
+import SavePaletteForm from './SavePaletteForm';
 import clsx from 'clsx';
 import {ThemeProvider} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +11,6 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import myTheme from './styles/Themes';
 
 const drawerWidth = 250;
@@ -50,6 +50,10 @@ const styles = {
 
   popup: {
 
+  },
+
+  Palette_name_input: {
+    width: "100%",
   }
 
 }
@@ -60,26 +64,15 @@ class PaletteFormNav extends Component {
     super(props);
   }
 
-  componentDidMount() {
-
-    ValidatorForm.addValidationRule(
-      'isPalNameUnique', (value) => {
-        return this.props.palettes.every((pal) => pal.paletteName.toLowerCase() !== value.toLowerCase());
-      }
-    );
-
-  }
-
   render(){
 
     /* Extracting props */
     const {
-      classes, 
+      classes,
+      palettes,
       open,
       handleDrawerOpen,
       handleSave,
-      handleTextChange,
-      newPaletteName
     } = this.props;
 
     return(
@@ -103,32 +96,7 @@ class PaletteFormNav extends Component {
               Create a palette
             </Typography>
             <div className={classes.popup}>
-              <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
-                <TextValidator
-                  value={newPaletteName}
-                  label="Palette Name"
-                  name="newPaletteName" /* handleTextChange relies on this attribute */
-                  onChange={handleTextChange}
-                  validators={['required','isPalNameUnique']}
-                  errorMessages={['Enter a palette name', 'Palette name already exists']}
-                  style={{
-                    width: "100%",
-                  }}
-                />
-                <ThemeProvider theme={myTheme}>
-                  <Button 
-                    variant="contained"
-                    type="submit"
-                    color="secondary"
-                    style={{
-                      height: "25px",
-                      marginLeft: "auto",
-                      boxShadow: "none"
-                    }}
-                  >Save
-                  </Button>
-                </ThemeProvider>
-              </ValidatorForm>
+              <SavePaletteForm handleSave={handleSave} classes={classes} palettes={palettes}/>
             </div>
             <ThemeProvider theme={myTheme}>
                 <Button 
