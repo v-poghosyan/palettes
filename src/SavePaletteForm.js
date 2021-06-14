@@ -10,21 +10,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {Picker} from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
+import styles from './styles/SavePaletteFormStyles';
 import myTheme from './styles/Themes';
-
-const styles = {
-
-  Palette_name_input: {
-    width: "100%",
-  },
-
-  PNI_button: {
-    marginRight: "18px",
-    marginBottom: "10px",
-    height: "30px"
-  }
-
-}
 
 class SavePaletteForm extends Component {
 

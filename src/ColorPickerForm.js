@@ -8,15 +8,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import chroma from 'chroma-js';
+import styles from './styles/ColorPickerFormStyles';
 import myTheme from './styles/Themes';
-
-const styles = {
-
-  Text_input: {
-    width: "100%",
-  },
-
-}
 
 class ColorPickerForm extends Component {
 
@@ -104,8 +97,8 @@ class ColorPickerForm extends Component {
                     /> : 
                     <FontAwesomeIcon 
                     icon={faArrowRight}
+                    /* Styling here since need access to state */
                     style={{
-                      /* Styling here since need access to state */
                       marginLeft: "10px",
                       color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                     }}

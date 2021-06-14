@@ -10,59 +10,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import myTheme from './styles/Themes';
-
-const drawerWidth = 250;
-const appBarHeight = 45
-
-/* The dynamically created styles use a 'myTheme' object that is modified from the default present in Material UI */
-const styles = {
-  root: {
-    display: 'flex',
-  },
-  
-  hide: {
-    display: 'none',
-  },
-
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-
-  drawerPaper: {
-    width: drawerWidth,
-  },
-
-  drawerHeader: {
-    display: 'none',
-    alignItems: 'center',
-    padding: myTheme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...myTheme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-
-  content: {
-    height: `calc(100vh - ${appBarHeight}px)`,
-    flexGrow: 1,
-    padding: 0,
-    transition: myTheme.transitions.create('margin', {
-      easing: myTheme.transitions.easing.sharp,
-      duration: myTheme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-    marginTop: `${appBarHeight}px`
-  },
-  
-  contentShift: {
-    transition: myTheme.transitions.create('margin', {
-      easing: myTheme.transitions.easing.easeOut,
-      duration: myTheme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-
-}
+import styles from './styles/NewPaletteFormStyles';
 
 class NewPaletteForm extends Component {
 
@@ -171,21 +119,13 @@ class NewPaletteForm extends Component {
             paper: classes.drawerPaper,
           }}
         >
-          <div 
-            className={classes.drawerHeader}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              minHeight: "45px",
-              marginBottom: "-2px"
-            }}
-          >
+          <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
           <ThemeProvider theme={myTheme}>
-            <Button 
+            <Button className={classes.Top_btn}
               variant="contained"
               color="secondary"
               onClick={this.clearPalette}
