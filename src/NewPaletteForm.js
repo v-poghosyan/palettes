@@ -9,12 +9,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import {ChromePicker} from 'react-color';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
-import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
-import chroma from 'chroma-js';
 import myTheme from './styles/Themes';
 
 const drawerWidth = 250;

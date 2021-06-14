@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import DraggableColorList from './DraggableColorList';
-import PaletteFormNav from './PaletteFormNav';
-import clsx from 'clsx';
-import {withStyles} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
-import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ChromePicker} from 'react-color';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
