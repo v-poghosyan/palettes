@@ -11,6 +11,7 @@ export default [
       { name: "purple", color: "#9C27B0" },
       { name: "deeppurple", color: "#673AB7" },
       { name: "blue", color: "#2196F3" },
+      { name: "grey", color: "#9E9E9E" },
       { name: "lightblue", color: "#03A9F4" },
       { name: "cyan", color: "#00BCD4" },
       { name: "teal", color: "#009688" },
@@ -23,7 +24,6 @@ export default [
       { name: "orange", color: "#FF9800" },
       { name: "deeporange", color: "#FF5722" },
       { name: "brown", color: "#795548" },
-      { name: "grey", color: "#9E9E9E" },
       { name: "bluegrey", color: "#607D8B" },
     ]
   },

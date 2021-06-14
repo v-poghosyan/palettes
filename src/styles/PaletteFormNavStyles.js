@@ -10,6 +10,10 @@ export default {
     display: "flex",
   },
 
+  hide: {
+    display: 'none',
+  },
+
   appBar: {
     display: "flex",
     justifyContent: "center",
@@ -34,6 +38,9 @@ export default {
 
   menuButton: {
     marginRight: myTheme.spacing(2),
+    "&:hover": {
+      color: "#f64f1e"
+    }
   },
 
   Title: {

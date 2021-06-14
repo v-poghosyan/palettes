@@ -9,10 +9,6 @@ export default {
   root: {
     display: 'flex',
   },
-  
-  hide: {
-    display: 'none',
-  },
 
   drawer: {
     width: drawerWidth,

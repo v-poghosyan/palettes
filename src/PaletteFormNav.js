@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withStyles} from '@material-ui/styles';
 import SavePaletteForm from './SavePaletteForm';
-import clsx from 'clsx';
+import classNames from 'classnames';
 import {ThemeProvider} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import {Link} from 'react-router-dom';
 import styles from './styles/PaletteFormNavStyles';
 import myTheme from './styles/Themes';
@@ -59,9 +59,9 @@ class PaletteFormNav extends Component {
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
+              className={classNames(classes.menuButton, {[classes.hide]: open})}
             >
-              <MenuIcon />
+              <AddToPhotosIcon />
             </IconButton>
             <Typography className={classes.Title} variant="h6" noWrap>
               Create a palette

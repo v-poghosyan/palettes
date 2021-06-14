@@ -16,7 +16,7 @@ class ColorPickerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentColor: "#6868cb",
+      currentColor: "#F64F1E",
       newColorName: "",
     }
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -83,7 +83,7 @@ class ColorPickerForm extends Component {
                   backgroundColor: (isPaletteFull ? "#E7EDF1" : currentColor),
                   color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                   width: "100%",
-                  height: "78px"
+                  height: "52px"
                 }}
               >{isPaletteFull ? "Palette is full" : "Add color"}
                   {isPaletteFull ?
