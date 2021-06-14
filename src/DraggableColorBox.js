@@ -44,7 +44,7 @@ const styles = {
   },
 
   DCB_trash_icon: {
-
+    color: props => chroma(props.color).luminance() <= 0.45 ? "white" : "black",
   },
 
 };

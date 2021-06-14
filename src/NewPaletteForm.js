@@ -19,29 +19,7 @@ const styles = {
   root: {
     display: 'flex',
   },
-  appBar: {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "white",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-    color: "#556e7d",
-    height: `${appBarHeight}px`,
-    transition: myTheme.transitions.create(['margin', 'width'], {
-      easing: myTheme.transitions.easing.sharp,
-      duration: myTheme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: myTheme.transitions.create(['margin', 'width'], {
-      easing: myTheme.transitions.easing.easeOut,
-      duration: myTheme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: myTheme.spacing(2),
-  },
+  
   hide: {
     display: 'none',
   },
@@ -102,6 +80,7 @@ class NewPaletteForm extends Component {
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
     this.clearPalette = this.clearPalette.bind(this);
     this.addRandomColor = this.addRandomColor.bind(this);
@@ -175,7 +154,7 @@ class NewPaletteForm extends Component {
       <div className={classes.root}>
         {/* Note: Passing down classes will allow us to keep the styles in one piece in the parent. So that PaletteFormNav need not be withStyles() */}
         <PaletteFormNav 
-          classes={classes} 
+          /* classes={classes} */
           open={open}
           newPaletteName={newPaletteName}
           palettes={palettes}
@@ -238,7 +217,7 @@ class NewPaletteForm extends Component {
             [classes.contentShift]: open,
           })}
         >
-          <div className={classes.drawerHeader} />
+          <div className={classes.drawerHeader}/>
           <DraggableColorList
             axis='xy' /* Vor horizontal and vertical draggability */
             distance={1} /* Required for delete button's onClick event to fire, otherwise a click registers as an attempt to drag */

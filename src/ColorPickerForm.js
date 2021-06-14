@@ -52,12 +52,7 @@ class ColorPickerForm extends Component {
   render() {
 
     const {currentColor, newColorName} = this.state; /* Extracting state */
-
-    const { /* Extracting props */
-      classes, 
-      isPaletteFull,
-      addNewColor
-    } = this.props;
+    const {classes, isPaletteFull} = this.props; /* Extracting props */
 
     return(
       <div>
@@ -65,7 +60,7 @@ class ColorPickerForm extends Component {
             color={currentColor}
             onChangeComplete={(col) => this.updateCurrentColor(col)}
             width="100%"
-          />
+        />
           <ValidatorForm onSubmit={() => this.handleSubmit(currentColor, newColorName)}>
             <TextValidator 
               value={newColorName}
