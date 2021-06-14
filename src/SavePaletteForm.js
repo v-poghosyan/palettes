@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {ThemeProvider} from '@material-ui/core';
+import {withStyles} from '@material-ui/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {Picker} from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 import myTheme from './styles/Themes';
+
+const styles = {
+
+  Palette_name_input: {
+    width: "100%",
+  },
+
+  PNI_button: {
+    marginRight: "18px",
+    marginBottom: "10px",
+    height: "30px"
+  }
+
+}
 
 class SavePaletteForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = { 
-      open: false,
-      newPaletteName: ""
+      newPaletteName: "",
+      whichDialog: "name",
     }
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.showEmojiDialog = this.showEmojiDialog.bind(this)
+    this.nameAndDecoratePalette = this.nameAndDecoratePalette.bind(this);
   }
 
   
@@ -35,32 +52,43 @@ class SavePaletteForm extends Component {
     this.setState({...this.state, [evt.target.name]: evt.target.value});
   }
 
-  handleClickOpen() {
-    this.setState({open: true});
-  };
+  showEmojiDialog() {
+    this.setState({...this.state, whichDialog: "emoji"})
+  }
 
-  handleClose() {
-    this.setState({open: false});
-  };
+  /* Assigns name and emoji to palette, and passes it up to be saved */
+  nameAndDecoratePalette(emoji) {
+    const newPal = {paletteName: this.state.newPaletteName, emoji: emoji.native};
+    this.props.handleSave(newPal);
+  }
+
 
   render() {
 
-    const {open, newPaletteName} = this.state; /* Extracting state */
-    const {classes, handleSave} = this.props; /* Extracting props */
+    const {newPaletteName, whichDialog} = this.state; /* Extracting state */
+    const {classes, hideForm} = this.props; /* Extracting props */
 
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open form dialog
-        </Button>
-        <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send updates
-              occasionally.
-            </DialogContentText>
-            <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
+        <ThemeProvider theme={myTheme}>
+          <Dialog 
+            className={classes.Emoji_dialog}
+            open={whichDialog === "emoji"}
+            onClose={hideForm} /* onClose event is triggered upon clicking anywhere outside of the dialog, closing it */
+          >
+            <DialogTitle id="form-dialog-title">Pick a palette emoji!</DialogTitle>
+            <Picker title="Choose tone" onSelect={this.nameAndDecoratePalette}/>
+          </Dialog>
+          <Dialog className={classes.Name_dialog}
+            open={whichDialog === "name"}
+            aria-labelledby="form-dialog-title"
+            onClose={hideForm} /* onClose event is triggered upon clicking anywhere outside of the dialog, closing it */
+          >
+            <DialogTitle id="form-dialog-title">Choose a palette name!</DialogTitle>
+            <ValidatorForm onSubmit={this.showEmojiDialog}>
+              <DialogContent>
+                <DialogContentText>
+                  Please enter a unique name for your new palette.
+                </DialogContentText>
                 <TextValidator className={classes.Palette_name_input}
                   value={newPaletteName}
                   label="Palette Name"
@@ -70,34 +98,27 @@ class SavePaletteForm extends Component {
                   validators={['required','isPalNameUnique']}
                   errorMessages={['Enter a palette name', 'Palette name already exists']}
                 />
-                <ThemeProvider theme={myTheme}>
-                  <Button 
-                    variant="contained"
-                    type="submit"
-                    color="secondary"
-                    style={{
-                      height: "25px",
-                      marginLeft: "auto",
-                      boxShadow: "none"
-                    }}
-                  >Save
-                  </Button>
-                </ThemeProvider>
-              </ValidatorForm>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+              </DialogContent>
+              <DialogActions>
+                <Button 
+                  className={classes.PNI_button} 
+                  onClick={hideForm} 
+                  color="primary"
+                >Cancel
+                </Button>
+                <Button className={classes.PNI_button}
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                >Save
+                </Button>
+              </DialogActions>
+            </ValidatorForm>
+          </Dialog>
+        </ThemeProvider>
     );
   }
   
 }
 
-export default SavePaletteForm;
+export default withStyles(styles)(SavePaletteForm);

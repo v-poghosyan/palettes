@@ -112,13 +112,9 @@ class NewPaletteForm extends Component {
     this.setState({...this.state, [evt.target.name]: evt.target.value});
   }
 
-  handleSave(newPalName) {
-    let newPal = { /* Builds a full palette object */
-      paletteName: newPalName,
-      id: newPalName.toLowerCase().replace(/ /g, "-"), /* Replace spaces globally with hyphens */
-      emoji: "🎨",
-      colors: this.state.colors
-    }
+  handleSave(newPal) { /* Continues building what's passed down to it from SavePaletteForm into a full palette object */
+    newPal.id = newPal.paletteName.toLowerCase().replace(/ /g, "-"); /* Replace spaces globally with hyphens */
+    newPal.colors = this.state.colors;
     /* Save palette */
     this.props.savePalette(newPal);
     /* Redirect to Palette List */

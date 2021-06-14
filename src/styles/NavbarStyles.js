@@ -39,6 +39,9 @@ export default {
     fontFamily: "'Montserrat', sans-serif",
     fontWeight: "700",
     height: "100%",
+    "&:hover a": {
+      color: "#f64f1e"
+    },
     /* styling anchors works with react Link components since the latter are anchors under the hood */
     "& a": {
       textDecoration: "none",

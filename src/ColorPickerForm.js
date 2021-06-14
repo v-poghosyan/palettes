@@ -13,7 +13,7 @@ import myTheme from './styles/Themes';
 const styles = {
 
   Text_input: {
-    width: "100%"
+    width: "100%",
   },
 
 }
@@ -23,7 +23,7 @@ class ColorPickerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentColor: "teal",
+      currentColor: "#6868cb",
       newColorName: "",
     }
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -87,9 +87,10 @@ class ColorPickerForm extends Component {
                 disabled={isPaletteFull}
                 /* Styling here since need access to state */
                 style={{
-                  backgroundColor: (isPaletteFull ? "#E0E0E0" : currentColor),
+                  backgroundColor: (isPaletteFull ? "#E7EDF1" : currentColor),
                   color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
-                  width: "100%"
+                  width: "100%",
+                  height: "78px"
                 }}
               >{isPaletteFull ? "Palette is full" : "Add color"}
                   {isPaletteFull ?

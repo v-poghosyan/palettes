@@ -19,7 +19,7 @@ const appBarHeight = 45
 const styles = {
 
   PaletteFormNav: {
-    display: "flex"
+    display: "flex",
   },
 
   appBar: {
@@ -48,12 +48,21 @@ const styles = {
     marginRight: myTheme.spacing(2),
   },
 
-  popup: {
-
+  Title: {
+    fontFamily: "'Montserrat', sans-serif"
   },
 
-  Palette_name_input: {
-    width: "100%",
+  Save_btn: {
+    height: "25px",
+    marginLeft: "auto",
+    boxShadow: "none"
+  },
+
+  Back_btn: {
+    height: "25px",
+    marginLeft: "2px",
+    boxShadow: "none",
+    backgroundColor: "#f64f1e"
   }
 
 }
@@ -62,6 +71,20 @@ class PaletteFormNav extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      formShowing: false
+    }
+    this.showForm = this.showForm.bind(this);
+    this.hideForm = this.hideForm.bind(this);
+  }
+
+  /* The following two methods control the pallete save dialog popup */
+  showForm() {
+    this.setState({formShowing: true});
+  }
+
+  hideForm() {
+    this.setState({formShowing: false});
   }
 
   render(){
@@ -74,6 +97,7 @@ class PaletteFormNav extends Component {
       handleDrawerOpen,
       handleSave,
     } = this.props;
+    const {formShowing} = this.state; /* Extracting state */
 
     return(
       <div classname={classes.PaletteFormNav}>
@@ -92,37 +116,31 @@ class PaletteFormNav extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography className={classes.Title} variant="h6" noWrap>
               Create a palette
             </Typography>
-            <div className={classes.popup}>
-              <SavePaletteForm handleSave={handleSave} classes={classes} palettes={palettes}/>
-            </div>
             <ThemeProvider theme={myTheme}>
-                <Button 
+                <Button className={classes.Save_btn}
                   variant="contained" 
                   color="secondary"
-                  style={{
-                    height: "25px",
-                    marginLeft: "auto",
-                    boxShadow: "none"
-                  }}
+                  onClick={this.showForm}
                 >Save Palette
                 </Button>
                 <Link to="/">
-                  <Button 
+                  <Button className={classes.Back_btn}
                     variant="contained" 
                     color="secondary"
-                    style={{
-                      height: "25px",
-                      marginLeft: "2px",
-                      boxShadow: "none",
-                      backgroundColor: "#f64f1e"
-                    }}
                   >Back
                   </Button>
                 </Link>
               </ThemeProvider>
+              {formShowing ? 
+                <SavePaletteForm 
+                  hideForm={this.hideForm}
+                  handleSave={handleSave} 
+                  classes={classes} 
+                  palettes={palettes}
+                /> : ""}
           </Toolbar>
         </AppBar>
       </div>
