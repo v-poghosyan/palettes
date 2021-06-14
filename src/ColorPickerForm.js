@@ -21,35 +21,39 @@ class ColorPickerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentColor: this.props.currentColor,
-      newColorName: this.props.newColorName
+      currentColor: "teal",
+      newColorName: "",
     }
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /* This is where we define custom form validators */
   componentDidMount() {
     ValidatorForm.addValidationRule(
       'isNameUnique', (value) => {
-        return this.state.colors.every((col) => col.name.toLowerCase() !== value.toLowerCase());
+        return this.props.colors.every((col) => col.name.toLowerCase() !== value.toLowerCase());
       }
     );
     ValidatorForm.addValidationRule(
       'isColorUnique', () => {
-        return this.state.colors.every((col) => col.color !== this.state.currentColor);
+        return this.props.colors.every((col) => col.color !== this.state.currentColor);
       }
     );
   }
+
+  handleSubmit(col, colName) {
+    this.props.addNewColor(col, colName);
+    this.setState({...this.state, newColorName: ""}); /* Resets text input */
+  }
   
-  handleUpdate(currCol) {
-    this.props.updateCurrentColor(currCol.hex); /* Update the state in parent (i.e. NewPaletteForm */
-    this.setState({...this.state, currentColor: currCol.hex}); /* Update the state in child (i.e. the current component) */
+  updateCurrentColor(col) {
+    this.setState({...this.state, currentColor: col.hex});
   }
 
-  handleChange(evt) {
-    this.props.handleTextChange(evt);
-    this.setState({...this.state, newColorName: evt.target.value});
+  handleTextChange(evt) { /* Handles naming a color as well as naming a palette */
+    this.setState({...this.state, [evt.target.name]: evt.target.value});
   }
 
   render() {
@@ -66,15 +70,15 @@ class ColorPickerForm extends Component {
       <div>
         <ChromePicker
             color={currentColor}
-            onChangeComplete={(currCol) => this.handleUpdate(currCol)}
+            onChangeComplete={(col) => this.updateCurrentColor(col)}
             width="100%"
           />
-          <ValidatorForm onSubmit={addNewColor}>
+          <ValidatorForm onSubmit={() => this.handleSubmit(currentColor, newColorName)}>
             <TextValidator 
               value={newColorName}
               label="Color Name"
               name="newColorName" /* handleTextChange relies on this attribute */
-              onChange={this.handleChange}
+              onChange={this.handleTextChange}
               validators={['required','isNameUnique','isColorUnique']}
               errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
               style={{

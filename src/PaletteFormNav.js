@@ -16,6 +16,7 @@ class PaletteFormNav extends Component {
 
   constructor(props) {
     super(props);
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
 
   componentDidMount() {
@@ -28,13 +29,16 @@ class PaletteFormNav extends Component {
 
   }
 
+  handleTextChange(evt) { /* Handles naming a color as well as naming a palette */
+    this.setState({...this.state, [evt.target.name]: evt.target.value});
+  }
+
   render(){
 
     /* Extracting props */
     const {
       classes, 
-      open, 
-      handleTextChange, 
+      open,
       handleDrawerOpen,
       handleSave,
       newPaletteName
@@ -65,7 +69,7 @@ class PaletteFormNav extends Component {
                 value={newPaletteName}
                 label="Palette Name"
                 name="newPaletteName" /* handleTextChange relies on this attribute */
-                onChange={handleTextChange}
+                onChange={this.handleTextChange}
                 validators={['required','isPalNameUnique']}
                 errorMessages={['Enter a palette name', 'Palette name already exists']}
                 style={{

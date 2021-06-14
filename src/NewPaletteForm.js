@@ -102,15 +102,11 @@ class NewPaletteForm extends Component {
     this.state = {
       open: false,
       newPaletteName: "",
-      currentColor: "teal",
-      newColorName: "",
       colors: this.props.palettes[0].colors
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
-    this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
-    this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
     this.clearPalette = this.clearPalette.bind(this);
@@ -127,16 +123,11 @@ class NewPaletteForm extends Component {
     this.setState({...this.state, open: false});
   };
 
-  /* Connected to color picker */
-  updateCurrentColor(col) {
-    this.setState({...this.state, currentColor: col});
-  }
-
   /* Connected to button and form validator */
-  addNewColor() {
+  addNewColor(col,colName) {
     let newCol = { /* Builds a simplified color object consisting of color and name */
-      name: this.state.newColorName,
-      color: this.state.currentColor
+      name: colName,
+      color: col
     }
     this.setState({...this.state, colors: [...this.state.colors, newCol]});
   }
@@ -183,7 +174,7 @@ class NewPaletteForm extends Component {
     
     /* HOC withStyles and useTheme */
     const {classes, maxColors, palettes} = this.props; /* Extracting props */
-    const {open, currentColor, colors, newColorName, newPaletteName} = this.state; /* Extracting state */
+    const {open, colors, newPaletteName} = this.state; /* Extracting state */
     const isPaletteFull = colors.length >= maxColors;
 
     return (
@@ -238,10 +229,9 @@ class NewPaletteForm extends Component {
             </Button>
           </ThemeProvider>
           <ColorPickerForm 
-            classes={classes} 
+            classes={classes}
+            colors={colors}
             isPaletteFull={isPaletteFull}
-            currentColor={currentColor}
-            newColorName={newColorName}
             updateCurrentColor={this.updateCurrentColor}
             handleTextChange={this.handleTextChange}
             addNewColor={this.addNewColor}
