@@ -6,12 +6,14 @@ import SingleColorPalette from './SingleColorPalette';
 import seedPalettes from './seedPalettes'; /* Default palettes */
 import {generatePalette} from './colorHelpers';
 import NewPaletteForm from './NewPaletteForm';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {palettes: seedPalettes}
+    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes")); /* Get palettes from localStorage */
+    this.state = {palettes: savedPalettes || seedPalettes} /* If no palettes in localStorage, load state from seedPalettes instead */
     this.findPalette = this.findPalette.bind(this);
     this.savePalette = this.savePalette.bind(this);
   }
@@ -21,7 +23,11 @@ class App extends Component {
   }
 
   savePalette(newPal) { /* Saved user created palette: called inside the NewPaletteForm component, and executes here */
-    this.setState({palettes: [...this.state.palettes, newPal]});
+    this.setState({palettes: [...this.state.palettes, newPal]}, this.syncToLocalStorage);     /* Sync to localStorage after setting the state as a call-back */
+  }
+
+  syncToLocalStorage()  { /* Saves palettes in the state to localStorage */
+    window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
   }
 
   render () {
