@@ -1,7 +1,7 @@
-import nested from 'jss-plugin-nested';
-import jss from 'jss';
+// import nested from 'jss-plugin-nested';
+// import jss from 'jss';
 
-jss.use(nested());
+// jss.use(nested());
 
 export default {
   DraggableColorBox: {

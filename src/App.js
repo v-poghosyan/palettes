@@ -13,16 +13,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     const savedPalettes = JSON.parse(window.localStorage.getItem("palettes")); /* Get palettes from localStorage */
-    this.state = {palettes: savedPalettes || seedPalettes} /* If no palettes in localStorage, load state from seedPalettes instead */
+    this.state = {palettes: (savedPalettes.length > 0) ? savedPalettes : seedPalettes} /* If no palettes in localStorage, load state from seedPalettes instead */
     this.findPalette = this.findPalette.bind(this);
     this.savePalette = this.savePalette.bind(this);
+    this.deletePalette = this.deletePalette.bind(this);
   }
 
   findPalette(id) { /* Return starter palette given id */
     return this.state.palettes.find((palette) => palette.id === id);
   }
 
-  savePalette(newPal) { /* Saved user created palette: called inside the NewPaletteForm component, and executes here */
+  deletePalette(id) { /* Deletes user palette & syncs with localStorage: called inside the MiniPalette component, and executed here */
+    this.setState( state => ({...this.state, palettes: state.palettes.filter((palette) => palette.id !== id)}), this.syncToLocalStorage);
+  }
+
+  savePalette(newPal) { /* Saved user created palette & syncs with localStorage: called inside the NewPaletteForm component, and executed here */
     this.setState({palettes: [...this.state.palettes, newPal]}, this.syncToLocalStorage);     /* Sync to localStorage after setting the state as a call-back */
   }
 
@@ -47,7 +52,7 @@ class App extends Component {
         <Route 
           exact 
           path="/" 
-          render={() => <PaletteList palettes={this.state.palettes}/>}
+          render={() => <PaletteList palettes={this.state.palettes} deletePalette={this.deletePalette}/>}
         />
         {/* Lines 26-27: Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
         {/* Then pass it in as the palette prop to the component */}

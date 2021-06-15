@@ -13,7 +13,7 @@ class PaletteList extends Component {
 
   render() {
 
-    const {classes, palettes} = this.props; /* Extracting prop */
+    const {classes, palettes, deletePalette} = this.props; /* Extracting prop */
 
     return(
       <div className={classes.PaletteList}>
@@ -25,7 +25,10 @@ class PaletteList extends Component {
         <div className={classes.PL_container}>
           <div className={classes.PL_palettes}>
             {palettes.map(
-            (palette) => (<Link to={`/palette/${palette.id}`} key={palette.id}><MiniPalette {...palette}/></Link>))} {/* Links to a matching Route "/palette/:id" */}
+            (palette) => (
+              <Link to={`/palette/${palette.id}`} key={palette.id}>
+                <MiniPalette {...palette} key={palette.id} deletePalette={deletePalette}/>
+              </Link>))} {/* Links to a matching Route "/palette/:id" */}
           </div>
         </div>
       </div>

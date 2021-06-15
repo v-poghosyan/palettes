@@ -1,10 +1,10 @@
 /* Styles for ColorBox component */
 
 import chroma from 'chroma-js';  /* Need this import to conditionally style text color based on the background color of a ColorBox */
-import nested from 'jss-plugin-nested';
-import jss from 'jss';
+// import nested from 'jss-plugin-nested';
+// import jss from 'jss';
 
-jss.use(nested());
+// jss.use(nested());
 
 export default {
 

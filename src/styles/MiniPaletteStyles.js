@@ -10,8 +10,9 @@ export default {
     boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
     overflow: "hidden",
     marginBottom: "1vh",
-    "&:hover" : {
-      cursor: "pointer"
+    cursor: "pointer",
+    "&:hover $MP_delete_icon": {
+      opacity: "1"
     }
   },
 
@@ -43,5 +44,20 @@ export default {
     margin: "0 auto",
     position: "relative",
     marginBottom: "-4px"
+  },
+
+  MP_delete_icon: {
+    color: "white",
+    backgroundColor: "#f64f1e",
+    padding: "10px",
+    width: "20px",
+    height: "20px",
+    position: "absolute",
+    right: "0px",
+    top: "0px",
+    zIndex: "10",
+    opacity: "0",
+    transition: "all 0.3s ease-in-out"
   }
+
 }
