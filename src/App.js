@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     const savedPalettes = JSON.parse(window.localStorage.getItem("palettes")); /* Get palettes from localStorage */
-    this.state = {palettes: (savedPalettes.length > 0) ? savedPalettes : seedPalettes} /* If no palettes in localStorage, load state from seedPalettes instead */
+    this.state = {palettes: savedPalettes || seedPalettes} /* If no palettes in localStorage, load state from seedPalettes instead */
     this.findPalette = this.findPalette.bind(this);
     this.savePalette = this.savePalette.bind(this);
     this.deletePalette = this.deletePalette.bind(this);

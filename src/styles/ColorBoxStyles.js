@@ -1,6 +1,7 @@
 /* Styles for ColorBox component */
 
 import chroma from 'chroma-js';  /* Need this import to conditionally style text color based on the background color of a ColorBox */
+import sizes from './Sizes';
 // import nested from 'jss-plugin-nested';
 // import jss from 'jss';
 
@@ -26,7 +27,25 @@ export default {
     "&:hover $CB_see_more" : {
       opacity: "1",
       transition: "0.5s"
+    },
+
+    /* Responsive features */
+
+    [sizes.down("lg")]: {
+      width: "25%",
+      height: props => (props.moreLink ? "20%" : "40%"), /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
+    },
+
+    [sizes.down("md")]: {
+      width: "50%",
+      height: props => (props.moreLink ? "10%" : "20%"), /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
+    },
+
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: props => (props.moreLink ? "5%" : "10%"), /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
     }
+
   },
 
   CB_copy_button : {
