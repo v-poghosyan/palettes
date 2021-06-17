@@ -121,15 +121,14 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className={classes.leftChevron}/>
             </IconButton>
           </div>
           <ThemeProvider theme={myTheme}>
             <Button className={classes.Top_btn}
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={this.clearPalette}
-              style={{backgroundColor: "#f64f1e"}}
             >Clear palette
             </Button>
             <Button 

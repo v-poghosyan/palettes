@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import chroma from 'chroma-js';
-import styles from './styles/ColorPickerFormStyles';
+import {styles, chromePickerStyles} from './styles/ColorPickerFormStyles';
 import myTheme from './styles/Themes';
 
 class ColorPickerForm extends Component {
@@ -59,28 +59,29 @@ class ColorPickerForm extends Component {
     return(
       <div className={classes.ColorPickerForm}>
         <ChromePicker
+            styles={chromePickerStyles}
             color={currentColor}
             onChangeComplete={(col) => this.updateCurrentColor(col)}
             width="100%"
         />
           <ValidatorForm onSubmit={() => this.handleSubmit(currentColor, newColorName)}>
-            <TextValidator className={classes.Text_input}
-              value={newColorName}
-              label="Color Name"
-              name="newColorName" /* handleTextChange relies on this attribute */
-              variant="filled"
-              onChange={this.handleTextChange}
-              validators={['required','isNameUnique','isColorUnique']}
-              errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
-            />
             <ThemeProvider theme={myTheme}>
+              <TextValidator className={classes.Text_input}
+                value={newColorName}
+                label="Color Name"
+                name="newColorName" /* handleTextChange relies on this attribute */
+                variant="filled"
+                onChange={this.handleTextChange}
+                validators={['required','isNameUnique','isColorUnique']}
+                errorMessages={['Enter a color name', 'Color name already exists', 'Color already exists']}
+              />
               <Button
                 variant="contained" 
                 type="submit"
                 disabled={isPaletteFull}
                 /* Styling here since need access to state */
                 style={{
-                  backgroundColor: (isPaletteFull ? "#E7EDF1" : currentColor),
+                  backgroundColor: (isPaletteFull ? "#383838" : currentColor),
                   color: chroma(currentColor).luminance() <= 0.45 ? "white" : "black",
                   width: "100%",
                   height: "52px"

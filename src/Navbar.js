@@ -10,6 +10,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusSquare, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import {ThemeProvider} from '@material-ui/core';
+import myTheme from './styles/Themes';
 import styles from './styles/NavbarStyles';
 
 class Navbar extends Component {
@@ -68,9 +70,9 @@ class Navbar extends Component {
               step={100}
               onAfterChange={changeLevel}
               handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive specificity of :hover, :active, :focus, etc pseudo-classes */
-                backgroundColor: '#556e7d', 
+                backgroundColor: '#f64f1e', 
                 outline: 'none', 
-                border: '1px solid #556e7d', 
+                border: '1px solid #f64f1e', 
                 marginTop: '-2px',
                 boxShadow: 'none'}
               ]}
@@ -81,11 +83,13 @@ class Navbar extends Component {
         {showFormatChanger ? 
           <div className={classes.Select_wrapper}>
             <span>Change format </span>
-            <Select value={format} onChange={this.handleFormatChange}>
-              <MenuItem value="hex">HEX</MenuItem>
-              <MenuItem value="rgb">RGB</MenuItem>
-              <MenuItem value="rgba">RGBA</MenuItem>
-            </Select>
+            <ThemeProvider theme={myTheme}>
+              <Select value={format} onChange={this.handleFormatChange} styles={{color: "white"}}>
+                <MenuItem color="white" value="hex">HEX</MenuItem>
+                <MenuItem value="rgb">RGB</MenuItem>
+                <MenuItem value="rgba">RGBA</MenuItem>
+              </Select>
+            </ThemeProvider>
           </div> : ""}
 
         {/* Snackbar to notify of format change - using material-ui */} 

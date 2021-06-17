@@ -63,7 +63,7 @@ class SavePaletteForm extends Component {
             onClose={hideForm} /* onClose event is triggered upon clicking anywhere outside of the dialog, closing it */
           >
             <DialogTitle id="form-dialog-title">Pick a palette emoji!</DialogTitle>
-            <Picker title="Choose tone" onSelect={this.nameAndDecoratePalette}/>
+            <Picker title="Choose tone" theme="dark" onSelect={this.nameAndDecoratePalette}/>
           </Dialog>
           <Dialog className={classes.Name_dialog}
             open={whichDialog === "name"}
@@ -88,15 +88,15 @@ class SavePaletteForm extends Component {
               </DialogContent>
               <DialogActions>
                 <Button 
-                  className={classes.PNI_button} 
-                  onClick={hideForm} 
-                  color="primary"
+                  className={classes.PNI_cancel_button} 
+                  onClick={hideForm}
+                  color="secondary"
                 >Cancel
                 </Button>
-                <Button className={classes.PNI_button}
+                <Button className={classes.PNI_save_button}
                   variant="contained"
                   type="submit"
-                  color="secondary"
+                  color="primary"
                 >Save
                 </Button>
               </DialogActions>

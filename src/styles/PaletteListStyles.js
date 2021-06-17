@@ -1,18 +1,20 @@
 /* Styles for PaletteList */
 
 import sizes from './Sizes';
+import background from './Background.svg';
 
 export default {
 
   PaletteList: {
-    backgroundColor: "gray",
     height: "100vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     fontFamily: "'Montserrat', sans-serif;",
-    overflow: "scroll"
+    overflow: "scroll",
+    overflowX: "hidden",
+    backgroundImage : `url(${background})`
   },
 
   PL_container: {

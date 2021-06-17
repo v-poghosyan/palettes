@@ -6,7 +6,7 @@ export default {
 
   Navbar: {
     display: "flex",
-    backgroundColor: "white",
+    backgroundColor: "#242424",
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -21,7 +21,7 @@ export default {
   Nav_add_palette: {
     marginLeft: "auto",
     marginRight: "20px",
-    color: "#556e7d",
+    color: "white",
     "&:hover": {
       color: "#f64f1e"
     }
@@ -37,29 +37,29 @@ export default {
     marginRight: "10px",
     padding: "0 12px",
     fontSize: "1.5rem",
-    backgroundColor: "#e7edf1",
+    backgroundColor: "#242424",
     fontFamily: "'Montserrat', sans-serif",
     fontWeight: "700",
     height: "100%",
-    "&:hover a": {
+    "&:hover a:first-child": {
       color: "#f64f1e"
     },
     /* styling anchors works with react Link components since the latter are anchors under the hood */
     "& a:first-child": {
       textDecoration: "none",
-      color: "#556e7d",
+      color: "white"
     },
     "& a:nth-child(2)" : {
-      color: "#556e7d",
+      color: "white",
       display: "none"
     },
     /* Navbar responsive styles */
     [sizes.down("xs")]: {
       "& a": {
-        display: "none",
+        display: props => (props.showAddNewPalette ? "flex" : "none")
       },
       "& a:nth-child(2)" : {
-        display: "flex"
+        display: props => (props.showAddNewPalette ? "none" : "flex")
       }
     }
   },
@@ -68,6 +68,7 @@ export default {
     width: "30%",
     display: "flex",
     flexDirection: "row",
+    color: "white",
     alignItems: "center",
     "& span": {
       display: "inline-flex",
@@ -111,6 +112,7 @@ export default {
     flexDirection: "row",
     marginLeft: "auto", /* push to left */
     marginRight: "20px",
+    color: "white",
     "& span": {
       display: "flex",
       alignItems: "center",
@@ -135,11 +137,12 @@ export default {
     display: "flex",
     /* .rc-slider-track and .rc-slider-rail are not dynamic classes, so they can be selected like so */
     "& .rc-slider-track": {
-      backgroundColor: "#a1b8c7",
+      backgroundColor: "#5e5e5e",
       height: "10px",
     },
     "& .rc-slider-rail": {
-      height: "10px"
+      height: "10px",
+      backgroundColor: "#363636",
     } 
   }
 

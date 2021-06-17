@@ -18,9 +18,9 @@ export default {
   appBar: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#242424",
     boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-    color: "#556e7d",
+    color: "white",
     height: `${appBarHeight}px`,
     transition: myTheme.transitions.create(['margin', 'width'], {
       easing: myTheme.transitions.easing.sharp,
@@ -61,7 +61,6 @@ export default {
     height: "25px",
     marginLeft: "2px",
     boxShadow: "none",
-    backgroundColor: "#f64f1e"
   }
 
 }

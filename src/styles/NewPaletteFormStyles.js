@@ -9,10 +9,12 @@ const appBarHeight = APP_BAR_HEIGHT;
 export default {
   root: {
     display: 'flex',
+    backgroundColor: "#242424"
   },
 
   drawer: {
     width: drawerWidth,
+    backgroundColor: "#242424",
     flexShrink: 0,
     /* Drawer responsive styles */
     [sizes.down("xs")]: {
@@ -22,6 +24,7 @@ export default {
 
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: "#242424",
     /* Drawer paper responsive styles */
     [sizes.down("xs")]: {
       width: "100%"
@@ -35,6 +38,13 @@ export default {
     // necessary for content to be below app bar
     ...myTheme.mixins.toolbar,
     justifyContent: 'flex-end',
+  },
+
+  leftChevron: {
+    color: "white",
+    "&:hover": {
+      color: "#F64F1E"
+    }
   },
 
   content: {

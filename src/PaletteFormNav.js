@@ -69,7 +69,7 @@ class PaletteFormNav extends Component {
             <ThemeProvider theme={myTheme}>
                 <Button className={classes.Save_btn}
                   variant="contained" 
-                  color="secondary"
+                  color="primary"
                   onClick={this.showForm}
                 >Save
                 </Button>

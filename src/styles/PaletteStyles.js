@@ -7,6 +7,7 @@ export default {
   Palette: {
     height: "100vh",
     width: "100vw",
+    backgroundColor: "black"
   },
 
   Pal_colors: {
@@ -24,7 +25,7 @@ export default {
     cursor: "pointer",
     /* When styling CB-see-more, the boxes get spaced out - this line fixes that */
     marginBottom: "-4px",
-    backgroundColor: "#556e7d",
+    backgroundColor: "black",
 
     /* Back button responsive styles */
 

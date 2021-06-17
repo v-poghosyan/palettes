@@ -5,7 +5,7 @@ import sizes from './Sizes';
 export default {
 
   MiniPalette: {
-    backgroundColor: "white",
+    backgroundColor: "#242424",
     width: "100%",
     height: "200px",
     padding: "0.5rem",
@@ -33,7 +33,7 @@ export default {
     justifyContent: "space-between",
     alignItems: "center",
     margin: "0",
-    color: "black",
+    color: "white",
     padding: "0.5rem 0.5rem 0.5rem 0",
     fontFamily: "'Montserrat', sans-serif",
     fontSize: "1rem",
@@ -54,7 +54,7 @@ export default {
   },
 
   MP_delete_icon: {
-    color: "white",
+    color: "black",
     backgroundColor: "#f64f1e",
     padding: "10px",
     width: "20px",
@@ -64,6 +64,7 @@ export default {
     top: "0px",
     zIndex: "10",
     opacity: "0",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
     transition: "all 0.3s ease-in-out"
   }
 
