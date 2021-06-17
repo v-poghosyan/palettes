@@ -61,7 +61,7 @@ class Navbar extends Component {
         {/* If being rendered from Palette component, show slider. If being rendered from SingleColorPalette component, don't*/}
         {showSlider ? 
           <div className={classes.Slider_wrapper}>
-            <span><p>Level:</p> {sliderValue}</span>
+            <span><p>Level: </p>{sliderValue}</span>
             <Slider
               className = {classes.Slider} 
               defaultValue={sliderValue} 

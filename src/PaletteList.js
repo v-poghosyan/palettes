@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/styles';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import MiniPalette from './MiniPalette';
 import styles from './styles/PaletteListStyles';
 
@@ -23,13 +24,16 @@ class PaletteList extends Component {
           showAddNewPalette={true}
         />
         <div className={classes.PL_container}>
-          <div className={classes.PL_palettes}>
+          <TransitionGroup className={classes.PL_palettes}> {/* Animated delete operation (note: renders as a div so may give it a wrapper class) */}
             {palettes.map(
             (palette) => (
-              <Link to={`/palette/${palette.id}`} key={palette.id}>
-                <MiniPalette {...palette} key={palette.id} deletePalette={deletePalette}/>
-              </Link>))} {/* Links to a matching Route "/palette/:id" */}
-          </div>
+              <CSSTransition key={palette.id} classNames="fade" timeout={500}>
+                <Link to={`/palette/${palette.id}`} key={palette.id}>
+                  <MiniPalette {...palette} key={palette.id} deletePalette={deletePalette}/>
+                </Link>
+              </CSSTransition>
+            ))} {/* Links to a matching Route "/palette/:id" */}
+          </TransitionGroup>
         </div>
       </div>
     );

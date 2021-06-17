@@ -5,6 +5,17 @@ import background from './Background.svg';
 
 export default {
 
+  /* The following are global styles for the delete transition effect - global styles are not prefixed and postifixed dynamically by JSX */
+  "@global" : {
+    ".fade-exit": {
+      opacity: "1"
+    },
+    ".fade-exit-active": {
+      opacity: "0",
+      transition: "opacity 500ms ease-out"
+    },
+  },
+
   PaletteList: {
     height: "100vh",
     display: "flex",
