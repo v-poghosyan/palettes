@@ -6,8 +6,8 @@ import SingleColorPalette from './SingleColorPalette';
 import seedPalettes from './seedPalettes'; /* Default palettes */
 import {generatePalette} from './colorHelpers';
 import NewPaletteForm from './NewPaletteForm';
-import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import './styles/index.css';
 
 class App extends Component {
 
@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   savePalette(newPal) { /* Saved user created palette & syncs with localStorage: called inside the NewPaletteForm component, and executed here */
-    this.setState({palettes: [...this.state.palettes, newPal]}, this.syncToLocalStorage);     /* Sync to localStorage after setting the state as a call-back */
+    this.setState({palettes: [...this.state.palettes, newPal]}, this.syncToLocalStorage); /* Sync to localStorage after setting the state as a call-back */
   }
 
   syncToLocalStorage()  { /* Saves palettes in the state to localStorage */
@@ -38,49 +38,68 @@ class App extends Component {
 
   render () {
     return (
-      <Switch>
-        <Route 
-          exact
-          path="/palette/new"
-          render={(routeProps) => 
-            <NewPaletteForm 
-              {...routeProps} 
-              palettes={this.state.palettes} 
-              savePalette={this.savePalette}
-            />
-          }
-        />
-        <Route 
-          exact 
-          path="/" 
-          render={() => <PaletteList palettes={this.state.palettes} deletePalette={this.deletePalette}/>}
-        />
-        {/* Lines 26-27: Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
-        {/* Then pass it in as the palette prop to the component */}
-        <Route 
-          exact 
-          path="/palette/:id"
-          render={routeProps => 
-            <Palette 
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.id)
-              )}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/palette/:paletteId/:colorId"
-          render={routeProps => 
-            <SingleColorPalette 
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.paletteId)
-              )}
-              colorId={routeProps.match.params.colorId}
-            />
-          }
-        />
-      </Switch>
+      <Route render={({location}) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames="fade" timeout={300}>
+            <Switch location={location}>
+              <Route 
+                exact
+                path="/palette/new"
+                render={(routeProps) => (
+                  <div className="page">
+                    <NewPaletteForm 
+                      {...routeProps} 
+                      palettes={this.state.palettes} 
+                      savePalette={this.savePalette}
+                    />
+                  </div>
+                )}
+              />
+              <Route 
+                exact 
+                path="/" 
+                render={() => (
+                  <div className="page">
+                    <PaletteList 
+                      palettes={this.state.palettes} 
+                      deletePalette={this.deletePalette}
+                    />
+                  </div>
+                )}
+              />
+              {/* Lines 26-27: Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
+              {/* Then pass it in as the palette prop to the component */}
+              <Route 
+                exact 
+                path="/palette/:id"
+                render={routeProps => (
+                  <div classname="page">
+                    <Palette 
+                      palette={generatePalette(
+                        this.findPalette(routeProps.match.params.id)
+                      )}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/palette/:paletteId/:colorId"
+                render={routeProps => (
+                  <div classname="page">
+                    <SingleColorPalette 
+                      palette={generatePalette(
+                        this.findPalette(routeProps.match.params.paletteId)
+                      )}
+                      colorId={routeProps.match.params.colorId}
+                    />
+                  </div>
+                )}
+              />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}/>
     )
 
   }

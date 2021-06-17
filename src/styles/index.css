@@ -12,6 +12,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 /* Gets rid of scrollbars */
 html, body, .App {
   overflow: hidden;
+  background-color: black;
 }
 
 /* Gets rid of link underlines */
@@ -22,4 +23,31 @@ a {
 /* Global font */
 .App {
   font-family: 'Montserrat', sans-serif;
+}
+
+/* Route transition classes */
+.page {
+
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }

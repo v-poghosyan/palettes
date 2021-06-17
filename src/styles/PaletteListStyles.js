@@ -5,7 +5,7 @@ import background from './Background.svg';
 
 export default {
 
-  /* The following are global styles for the delete transition effect - global styles are not prefixed and postifixed dynamically by JSX */
+  /* The following are global styles for the delete transition effect - global styles are not prefixed and postifixed dynamically by JSX (but they're still scoped to their component) */
   "@global" : {
     ".fade-exit": {
       opacity: "1"
