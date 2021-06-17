@@ -47,6 +47,7 @@ class SavePaletteForm extends Component {
   nameAndDecoratePalette(emoji) {
     const newPal = {paletteName: this.state.newPaletteName, emoji: emoji.native};
     this.props.handleSave(newPal);
+    this.setState({...this.state, whichDialog: ""}); /* Close emoji picker */
   }
 
 

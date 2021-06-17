@@ -2,7 +2,11 @@
 export default {
 
   Page: {
-
+    height: "100vh",
+    width: "100%",
+    position: "fixed",
+    backgroundColor: "black",
+    top: "0",  
   },
 
   "@global" : {
