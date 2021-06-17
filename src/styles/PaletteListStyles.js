@@ -12,7 +12,7 @@ export default {
     },
     ".fade-exit-active": {
       opacity: "0",
-      transition: "opacity 500ms ease-out"
+      transition: "opacity 300ms ease-out"
     },
   },
 

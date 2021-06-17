@@ -27,7 +27,7 @@ class PaletteList extends Component {
           <TransitionGroup className={classes.PL_palettes}> {/* Animated delete operation (note: renders as a div so may give it a wrapper class) */}
             {palettes.map(
             (palette) => (
-              <CSSTransition key={palette.id} classNames="fade" timeout={500}>
+              <CSSTransition key={palette.id} classNames="fade" timeout={300}>
                 <Link to={`/palette/${palette.id}`} key={palette.id}>
                   <MiniPalette {...palette} key={palette.id} deletePalette={deletePalette}/>
                 </Link>

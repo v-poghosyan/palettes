@@ -68,7 +68,7 @@ export default {
     background: "rgba(255,255,255,0.3)",
     fontSize: "1rem", /* Units of 'rem' are referenced from 'root font size.' Unlike 'em' units, these don't get smalled with each nested element */
     lineHeight: "30px", /* Same line height as the element itself: centers text vertically */
-    color: props => (chroma(props.background).luminance() >= 0.55 ? "black" : "white"),
+    color: props => (chroma(props.background).luminance() >= 0.45 ? "black" : "white"),
     textTransform: "uppercase",
     cursor: "pointer",
     /* Hide button until hover */
@@ -142,7 +142,7 @@ export default {
     zIndex: "20",
     /* Other styling */
     fontFamily: "'Montserrat', sans-serif",
-    color: props => (chroma(props.background).luminance() >= 0.55 ? "black" : "white"),
+    color: props => (chroma(props.background).luminance() >= 0.45 ? "black" : "white"),
     fontSize: "4rem",
     "&$CB_copy_msg_show" : {
       /* Make appear - display as flex to make vertical centering easier (since we're dealing with multi-line content) */
@@ -193,7 +193,7 @@ export default {
     fontSize: "0.75rem", /* Units of 'rem' are referenced from 'root font size.' Unlike 'em' units, these don't get smaller with each level of nesting */
     width: "60px",
     height: "30px",
-    color: props => (chroma(props.background).luminance() >= 0.55 ? "black" : "white"),
+    color: props => (chroma(props.background).luminance() >= 0.45 ? "black" : "white"),
     textTransform: "uppercase",
     textAlign: "center",
     lineHeight: "30px", /* Same line height as the element itself: centers text vertically */

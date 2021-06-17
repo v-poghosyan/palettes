@@ -7,7 +7,8 @@ export default {
   PNI_save_button: {
     marginRight: "18px",
     marginBottom: "10px",
-    height: "30px"
+    height: "30px",
+    color: "black"
   },
 
   PNI_cancel_button: {

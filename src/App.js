@@ -7,6 +7,7 @@ import seedPalettes from './seedPalettes'; /* Default palettes */
 import {generatePalette} from './colorHelpers';
 import NewPaletteForm from './NewPaletteForm';
 import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 class App extends Component {
 

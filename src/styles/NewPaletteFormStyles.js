@@ -79,6 +79,7 @@ export default {
 
   Top_btn: {
     marginTop: "-3px",
+    color: "black"
   }
 
 }

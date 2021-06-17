@@ -54,7 +54,8 @@ export default {
   Save_btn: {
     height: "25px",
     marginLeft: "auto",
-    boxShadow: "none"
+    boxShadow: "none",
+    color: "black"
   },
 
   Back_btn: {
