@@ -1,4 +1,5 @@
 import {DRAWER_WIDTH, APP_BAR_HEIGHT} from './Constants';
+import sizes from './Sizes';
 import myTheme from './Themes';
 
 const drawerWidth = DRAWER_WIDTH;
@@ -44,7 +45,10 @@ export default {
   },
 
   Title: {
-    fontFamily: "'Montserrat', sans-serif"
+    fontFamily: "'Montserrat', sans-serif",
+    [sizes.down("xs")]: {
+      display: "none"
+    }
   },
 
   Save_btn: {

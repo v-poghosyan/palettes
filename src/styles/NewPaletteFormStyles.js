@@ -1,4 +1,5 @@
 import {DRAWER_WIDTH, APP_BAR_HEIGHT} from './Constants';
+import sizes from './Sizes';
 import myTheme from './Themes';
 
 const drawerWidth = DRAWER_WIDTH;
@@ -13,10 +14,18 @@ export default {
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    /* Drawer responsive styles */
+    [sizes.down("xs")]: {
+      width: "100%"
+    }
   },
 
   drawerPaper: {
     width: drawerWidth,
+    /* Drawer paper responsive styles */
+    [sizes.down("xs")]: {
+      width: "100%"
+    }
   },
 
   drawerHeader: {
@@ -37,7 +46,11 @@ export default {
       duration: myTheme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
-    marginTop: `${appBarHeight}px`
+    marginTop: `${appBarHeight}px`,
+    /* Content responsive styles */
+    [sizes.down("xs")]: {
+      marginLeft: "-100%"
+    }
   },
   
   contentShift: {
@@ -55,7 +68,7 @@ export default {
   },
 
   Top_btn: {
-    marginTop: "-3px"
+    marginTop: "-3px",
   }
 
 }

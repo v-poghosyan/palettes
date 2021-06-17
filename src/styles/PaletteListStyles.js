@@ -1,5 +1,7 @@
 /* Styles for PaletteList */
 
+import sizes from './Sizes';
+
 export default {
 
   PaletteList: {
@@ -15,11 +17,22 @@ export default {
 
   PL_container: {
     width: "50%",
-    height: "100%",
+    height: "95%",
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "column",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    position: "relative",
+    top: "50px",
+    [sizes.down("xl")]: {
+      width: "60%"
+    },
+    [sizes.down("lg")]: {
+      width: "70%"
+    },
+    [sizes.down("lg")]: {
+      width: "80%"
+    },
   },
 
   PL_nav: {
@@ -34,7 +47,14 @@ export default {
     width: "100%", /* A row is 100% the width of the container */
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)", /* 3 items going across a row */
-    gridGap: "5%", /* (30 + 5 + 30 + 5 + 30)% = 100% */
+    gridGap: "2rem", /* (30 + 5 + 30 + 5 + 30)% = 100% */
+    gridRowGap: "1rem",
+    [sizes.down("sm")]: {
+      gridTemplateColumns: "repeat(2, 45%)",
+    },
+    [sizes.down("xs")]: {
+      gridTemplateColumns: "repeat(1, 95%)",
+    },
   }
 
 }

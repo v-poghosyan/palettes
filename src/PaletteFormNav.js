@@ -71,7 +71,7 @@ class PaletteFormNav extends Component {
                   variant="contained" 
                   color="secondary"
                   onClick={this.showForm}
-                >Save Palette
+                >Save
                 </Button>
                 <Link to="/">
                   <Button className={classes.Back_btn}

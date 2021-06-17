@@ -1,3 +1,4 @@
+import sizes from './Sizes';
 // import nested from 'jss-plugin-nested';
 // import jss from 'jss';
 
@@ -16,6 +17,22 @@ export default {
     marginBottom: "-5px",
     "&:hover $DCB_trash_icon": {
       transform: "scale(1.2)"
+    },
+
+    /* DraggableColorBox responsive styles */
+    [sizes.down("lg")]: {
+      width: "33.33%",
+      height: "14.28%"
+    },
+
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "10%"
+    },
+
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "5%"
     }
   },
 
@@ -25,7 +42,7 @@ export default {
     justifyContent: "space-between",
     width: "100%",
     left: "0px",
-    bottom: "0px",
+    bottom: "-5px",
     padding: "10px",
     color: "black",
     letterSpacing: "1px",
@@ -35,7 +52,6 @@ export default {
   },
 
   DCB_trash_icon: {
-    
   }
 
 };

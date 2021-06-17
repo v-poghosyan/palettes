@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPlusSquare} from '@fortawesome/free-solid-svg-icons';
+import {faPlusSquare, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './styles/NavbarStyles';
@@ -45,6 +45,7 @@ class Navbar extends Component {
         {showAddNewPalette || showFormatChanger ? 
           <div className={classes.Navbar_logo}>
             <Link to="/">Palettes.io</Link>
+            <Link to="/"><FontAwesomeIcon icon={faArrowLeft} /></Link>
           </div> : ''}
 
         {/* Add new palette */}
@@ -58,7 +59,7 @@ class Navbar extends Component {
         {/* If being rendered from Palette component, show slider. If being rendered from SingleColorPalette component, don't*/}
         {showSlider ? 
           <div className={classes.Slider_wrapper}>
-            <span>Level: {sliderValue}</span>
+            <span><p>Level:</p> {sliderValue}</span>
             <Slider
               className = {classes.Slider} 
               defaultValue={sliderValue} 
@@ -66,7 +67,7 @@ class Navbar extends Component {
               max={900}
               step={100}
               onAfterChange={changeLevel}
-              handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive :hover, :active, :focus, etc pseudo-classes */
+              handleStyle={[{ /* Using this prop instead of simply selecting in CSS because of elusive specificity of :hover, :active, :focus, etc pseudo-classes */
                 backgroundColor: '#556e7d', 
                 outline: 'none', 
                 border: '1px solid #556e7d', 

@@ -1,10 +1,13 @@
 /* Styles for MiniPalette */
 
+import sizes from './Sizes';
+
 export default {
 
   MiniPalette: {
     backgroundColor: "white",
-    height: "20vh",
+    width: "100%",
+    height: "200px",
     padding: "0.5rem",
     position: "relative",
     boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
@@ -13,12 +16,16 @@ export default {
     cursor: "pointer",
     "&:hover $MP_delete_icon": {
       opacity: "1"
-    }
+    },
+
   },
 
   MP_colors: {
     backgroundColor: "white",
-    height: "85%"
+    height: "80%",
+    [sizes.down("sm")]: {
+      height: "85%"
+    }
   },
 
   MP_title : {
@@ -27,7 +34,7 @@ export default {
     alignItems: "center",
     margin: "0",
     color: "black",
-    paddingTop: "0.5rem",
+    padding: "0.5rem 0.5rem 0.5rem 0",
     fontFamily: "'Montserrat', sans-serif",
     fontSize: "1rem",
     position: "relative",

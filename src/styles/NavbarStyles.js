@@ -1,5 +1,7 @@
 /* Styles for Navbar */
 
+import sizes from './Sizes';
+
 export default {
 
   Navbar: {
@@ -11,7 +13,7 @@ export default {
     height: "5%",
     width: "100%",
     /* Positioning needed for z-index, which is needed for box shadow to be visible */
-    position: "relative",
+    position: "sticky",
     zIndex: "30",
     boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
   },
@@ -34,7 +36,7 @@ export default {
     alignItems: "center",
     marginRight: "10px",
     padding: "0 12px",
-    fontSize: "22px",
+    fontSize: "1.5rem",
     backgroundColor: "#e7edf1",
     fontFamily: "'Montserrat', sans-serif",
     fontWeight: "700",
@@ -43,25 +45,65 @@ export default {
       color: "#f64f1e"
     },
     /* styling anchors works with react Link components since the latter are anchors under the hood */
-    "& a": {
+    "& a:first-child": {
       textDecoration: "none",
-      color: "#556e7d"
+      color: "#556e7d",
+    },
+    "& a:nth-child(2)" : {
+      color: "#556e7d",
+      display: "none"
+    },
+    /* Navbar responsive styles */
+    [sizes.down("xs")]: {
+      "& a": {
+        display: "none",
+      },
+      "& a:nth-child(2)" : {
+        display: "flex"
+      }
     }
   },
   
   Slider_wrapper: {
-    width: "15%",
-    margin: "0 10px",
+    width: "30%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     "& span": {
-      display: "flex",
+      display: "inline-flex",
       marginTop: "5px",
-      width: "140px",
+      marginRight: "20px",
+      width: "20%",
       fontSize: "1rem",
       fontFamily: "'Montserrat', sans-serif"
+    },
+    /* Navbar responsive styles */
+    // [sizes.down("lg")]: {
+    //   width: "50%",
+    // },
+    [sizes.down("md")]: {
+      width: "40%",
+      "& span": {
+        width: "10%",
+      },
+      "& span p": {
+        display: "none"
+      }
+    },
+    [sizes.down("xs")]: {
+      width: "50%",
+      "& span": {
+        width: "12%",
+      },
+      "& span p": {
+        display: "none"
+      }
     }
+  },
+
+  Slider: {
+    display: "inline-flex",
+    width: "25%"
   },
 
   Select_wrapper: {
@@ -74,6 +116,18 @@ export default {
       alignItems: "center",
       marginRight: "20px",
       fontFamily: "'Montserrat', sans-serif"
+    },
+    /* Navbar responsive styles */
+    [sizes.down("md")]: {
+      "& span" : {
+        display: "none"
+      }
+    },
+    [sizes.down("xs")]: {
+      marginRight: "5px",
+      "& span" : {
+        display: "none"
+      }
     }
   },
   

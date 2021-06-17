@@ -29,16 +29,17 @@ export default {
       transition: "0.5s"
     },
 
-    /* Responsive features */
-
+    /* ColorBox responsive styles */
     [sizes.down("lg")]: {
-      width: "25%",
-      height: props => (props.moreLink ? "20%" : "40%"), /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
+      width: "33.33%",
+      /* Note: dynamic values override each other, but if we wanted to override a dynamic value with a static 'e.g. height: "20%"' we'd have to use "!important" */
+      height: props => (props.moreLink ? "14.28%" : "25%"), 
     },
 
     [sizes.down("md")]: {
       width: "50%",
-      height: props => (props.moreLink ? "10%" : "20%"), /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
+      /* Note: dynamic values override each other, but if we wanted to override a dynamic value with a static 'e.g. height: "20%"' we'd have to use "!important" */
+      height: props => (props.moreLink ? "10%" : "20%"), 
     },
 
     [sizes.down("xs")]: {
@@ -80,7 +81,7 @@ export default {
     /* Take up whole bottom portion of parent and align to the bottom-left corner */
     width: "100%",
     left: "0px",
-    bottom: "0px",
+    bottom: "-5px",
     /* Other styling */
     padding: "10px",
     color: props => (chroma(props.background).luminance() <= 0.45 ? "white" : "black"),

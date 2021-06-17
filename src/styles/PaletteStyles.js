@@ -1,5 +1,7 @@
 /* Styles for Palette and SingleColorPalette */
 
+import sizes from './Sizes';
+
 export default {
 
   Palette: {
@@ -13,7 +15,7 @@ export default {
 
   Go_back: {
     width: "20%",
-    height: "50%", /* Checks if ColorBox is being rendered by Palette or SingleColorPalette */
+    height: "50%",
     margin: "0 auto",
     /* Inline-block elements accept both width and height properties */ 
     display: "inline-block",
@@ -23,6 +25,23 @@ export default {
     /* When styling CB-see-more, the boxes get spaced out - this line fixes that */
     marginBottom: "-4px",
     backgroundColor: "#556e7d",
+
+    /* Back button responsive styles */
+
+    [sizes.down("lg")]: {
+      width: "100%",
+      height: "25%" 
+    },
+
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "20%"
+    },
+
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%"
+    }
   },
   
   Go_back_button: {
