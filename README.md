@@ -1,4 +1,4 @@
-### Tools and Libraries Used
+### Tools and libraries used
 
 [**Material-UI**](https://material-ui.com/) : React components that implement Google's Material Design
 
