@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {withStyles} from '@material-ui/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './styles/MiniPaletteStyles';
 
 /* Props received : { classes: "unique JSS class id", paletteName: "name of one palette", id: "id of one palette", colors: {...} } */
 
-class MiniPalette extends Component{
+class MiniPalette extends PureComponent{
 
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ class MiniPalette extends Component{
   }
 
   render() {
-
+    console.log("rendering");
     const {classes, paletteName, emoji, colors } = this.props; /* Extracting props */
 
     return (
