@@ -21,7 +21,7 @@
 
 [**React-Transition-Group**](https://www.npmjs.com/package/react-transition-group) : Animating React components and transitions between routes
 
-[**GH_Pages**](https://www.npmjs.com/package/gh-pages) : Deploying react apps to Github Pages
+[**GH-Pages**](https://www.npmjs.com/package/gh-pages) : Deploying react apps to Github Pages
 
 ### What I learned from this project
 
