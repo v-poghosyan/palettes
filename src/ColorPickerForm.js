@@ -64,7 +64,10 @@ class ColorPickerForm extends Component {
             onChangeComplete={(col) => this.updateCurrentColor(col)}
             width="100%"
         />
-          <ValidatorForm onSubmit={() => this.handleSubmit(currentColor, newColorName)}>
+          <ValidatorForm 
+            onSubmit={() => this.handleSubmit(currentColor, newColorName)}
+            instantValidate={false}
+          >
             <ThemeProvider theme={myTheme}>
               <TextValidator className={classes.Text_input}
                 value={newColorName}

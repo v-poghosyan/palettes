@@ -9,6 +9,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import seedPalettes from './seedPalettes';
 import myTheme from './styles/Themes';
 import styles from './styles/NewPaletteFormStyles';
 
@@ -25,7 +26,7 @@ class NewPaletteForm extends Component {
     this.state = {
       open: false,
       newPaletteName: "",
-      colors: this.props.palettes[0].colors
+      colors: seedPalettes[0].colors
     }
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
