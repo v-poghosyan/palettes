@@ -11,10 +11,10 @@ Palettes is an app that makes it easy to create, manage, and access color palett
 Palettes is published on Github Pages at the following [link](https://v-poghosyan.github.io/palettes/). 
 
 If you wish to run Palettes locally instead follow these steps:
-1. Clone the project: git clone https://github.com/v-poghosyan/palettes.git;
-2. Go to the project folder: cd palettes;
-3. Download the dependencies: npm install;
-4. Start the application: npm start.
+1. Clone the project: `git clone https://github.com/v-poghosyan/palettes.git`
+2. Go to the project folder: `cd palettes`;
+3. Download the dependencies: `npm install`;
+4. Start the application: `npm start`.
 
 ### 🔧 Tools and libraries used
 
