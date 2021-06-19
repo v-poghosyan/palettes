@@ -4,7 +4,7 @@ Palettes is an app that facilitates the creation, management, and access of colo
 
 ### 🕹️ Demo
 
-
+![Palettes demo](https://user-images.githubusercontent.com/30192766/122650194-63c76700-d0e6-11eb-9b05-8d075678e9fc.mp4)
 
 ### 💻 How to use
 
