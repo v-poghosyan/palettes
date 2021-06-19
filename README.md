@@ -1,6 +1,6 @@
 ### 📄 About
 
-Palettes is an app that makes it easy to create, manage, and access color palettes for your next design project. Simply add colors using the built-in color picker or generate random ones. Use the drag and drop functionality to rearrange the order of the colors as you see fit. Once your palette is ready, save it by choosing a name and a descriptive emoji. To access the colors in your palette all you have to do is adjust the lightness level of the colors, and click on a color box to copy its HEX, RGB, or RGBA values. Have fun designing!
+Palettes is an app that facilitates the creation, management, and access of color palettes for your next design project. Simply add colors using the built-in color picker or generate random ones. Use the drag and drop functionality to rearrange the order of the colors as you see fit. Once your palette is ready, save it by giving it a name and a descriptive emoji. To access the colors in your palette all you have to do is adjust the lightness level of the colors, and click on a color box to copy its HEX, RGB, or RGBA values. I hope you have fun trying it!
 
 ### 🕹️ Demo
 
