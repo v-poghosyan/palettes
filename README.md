@@ -1,4 +1,22 @@
-### Tools and libraries used
+### 📄 About
+
+Palettes is an app that makes it easy to create, manage, and access color palettes for your next design project. Simply add colors using the built-in color picker or generate random ones. Use the drag and drop functionality to rearrange the order of the colors as you see fit. Once your palette is ready, save it by choosing a name and a descriptive emoji. To access the colors in your palette all you have to do is adjust the level of lightness level of the colors, and click on a color box to copy its HEX, RGB, or RGBA values. Have fun designing!
+
+### 🕹️ Demo
+
+
+
+### 💻 How to use
+
+Palettes is published on Github Pages at the following [link](https://v-poghosyan.github.io/palettes/). 
+
+If you wish to run Palettes locally instead follow these steps:
+1. Clone the project: git clone https://github.com/v-poghosyan/palettes.git;
+2. Go to the project folder: cd palettes;
+3. Download the dependencies: npm install;
+4. Start the application: npm start.
+
+### 🔧 Tools and libraries used
 
 [**Material-UI**](https://material-ui.com/) : React components that implement Google's Material Design
 
@@ -23,10 +41,10 @@
 
 [**GH-Pages**](https://www.npmjs.com/package/gh-pages) : Deploying react apps to Github Pages
 
-### What I learned from this project
+### 💡 What I learned from this project
 
 **JSS** 
-**Overview** : Specifying CSS styles in JS, JSS scopes classes to the specific components they are defined in. These types of components automatically receive the JSS styles as part of their `props` through being exported, and are called *higher-order components (HOCs).* Another major advantage of JSS, other than the scoping of classes, is that it allows for dynamically computed styles. 
+**Overview** : Specifying CSS styles in JS, JSS scopes classes to the specific components they are defined in. These types of components automatically receive the JSS styles as part of their `props` through being exported *with styles* as *higher-order components (HOCs).* Another major advantage of JSS, other than the scoping of classes, is that it allows for dynamically computed styles based on the component's `props`. 
 
 **Setup, Import and usage:**
 
