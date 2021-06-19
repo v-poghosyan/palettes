@@ -56,7 +56,7 @@ If you wish to run Palettes locally instead follow these steps:
 
    `export default withStyles(styles)(MyComponent)`
 
-   Where `styles` is an object whose keys act as CSS classes corresponding to object values containing key-value pairs of styles (*camelCased* instead of *kebab-cased* as in vanilla CSS).
+   Where `styles` is an object whose keys act as CSS classes corresponding to values that are also objects containing key-value pairs of styles (*camelCased* instead of *kebab-cased* as in vanilla CSS).
 
    *For example:*
 
