@@ -4,7 +4,7 @@ Palettes is a responsive React app that facilitates the creation, management, an
 
 ### 🕹️ Demo
 
-![Palettes demo](https://user-images.githubusercontent.com/30192766/122650194-63c76700-d0e6-11eb-9b05-8d075678e9fc.mp4)
+https://v-poghosyan.github.io/palettes
 
 ### 💻 How to use
 
