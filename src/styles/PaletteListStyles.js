@@ -1,7 +1,6 @@
 /* Styles for PaletteList */
 
 import sizes from './Sizes';
-import background from './Background.svg';
 
 export default {
 
@@ -25,8 +24,10 @@ export default {
     fontFamily: "'Montserrat', sans-serif;",
     overflow: "scroll",
     overflowX: "hidden",
-    backgroundImage : `url(${background})`
-  },
+    background: "#232526",  /* fallback for old browsers */
+    background: "radial-gradient(ellipse at top, #414345, transparent)",
+    background: "radial-gradient(ellipse at bottom, #232526, transparent)",  
+  }, 
 
   PL_container: {
     width: "50%",

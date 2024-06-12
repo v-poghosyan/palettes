@@ -16,7 +16,7 @@ class ColorPickerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentColor: "#F64F1E",
+      currentColor: "#f64f1e",
       newColorName: "",
     }
     this.updateCurrentColor = this.updateCurrentColor.bind(this);

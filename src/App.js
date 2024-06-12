@@ -29,7 +29,7 @@ class App extends Component {
     this.setState( state => ({...this.state, palettes: state.palettes.filter((palette) => palette.id !== id)}), this.syncToLocalStorage);
   }
 
-  savePalette(newPal) { /* Saved user created palette & syncs with localStorage: called inside the NewPaletteForm component, and executed here */
+  savePalette(newPal) { /* Saves user created palette & syncs with localStorage: called inside the NewPaletteForm component, and executed here */
     this.setState({palettes: [...this.state.palettes, newPal]}, this.syncToLocalStorage); /* Sync to localStorage after setting the state as a call-back */
   }
 
@@ -68,7 +68,7 @@ class App extends Component {
                   </Page>
                 )}
               />
-              {/* Lines 26-27: Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
+              {/* Get starter palette based on the URL id, then generate new palette (with levels and formats). */} 
               {/* Then pass it in as the palette prop to the component */}
               <Route 
                 exact 

@@ -46,7 +46,7 @@ class Navbar extends Component {
         {/* Logo */}
         {showAddNewPalette || showFormatChanger ? 
           <div className={classes.Navbar_logo}>
-            <Link to="/">Palettes.io</Link>
+            <Link to="/">Palettes</Link>
             <Link to="/"><FontAwesomeIcon icon={faArrowLeft} /></Link>
           </div> : ''}
 

@@ -43,7 +43,7 @@ export default {
   leftChevron: {
     color: "white",
     "&:hover": {
-      color: "#F64F1E"
+      color: "#f64f1e"
     }
   },
 
